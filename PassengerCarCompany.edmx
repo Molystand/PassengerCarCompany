@@ -1,0 +1,439 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище PassengerCarCompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ReleaseYear" Type="int" Nullable="false" />
+          <Property Name="Capacity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BusStop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="20" />
+          <Property Name="Sex" Type="nchar" MaxLength="3" Nullable="false" />
+          <Property Name="Birthdate" Type="date" Nullable="false" />
+          <Property Name="PhoneNumber" Type="char" MaxLength="15" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="RouteLength" Type="int" Nullable="false" />
+          <Property Name="AverTravelTime" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RouteSheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="DepartureTime" Type="time" Precision="0" Nullable="false" />
+          <Property Name="ArrivalTime" Type="time" Precision="0" Nullable="false" />
+          <Property Name="PlannedProfit" Type="int" />
+          <Property Name="RealProfit" Type="int" Nullable="false" />
+          <Property Name="DriverNumber" Type="int" Nullable="false" />
+          <Property Name="RouteNumber" Type="int" Nullable="false" />
+          <Property Name="BusNumber" Type="nchar" MaxLength="6" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StopsOnTheRoute">
+          <Key>
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="RouteNumber" />
+          </Key>
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="RouteNumber" Type="int" Nullable="false" />
+          <Property Name="StopId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__RouteShee__BusNu__38996AB5">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RouteSheet" Type="Self.RouteSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="RouteSheet">
+              <PropertyRef Name="BusNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteShee__Drive__36B12243">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RouteSheet" Type="Self.RouteSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="RouteSheet">
+              <PropertyRef Name="DriverNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteShee__Route__37A5467C">
+          <End Role="Route" Type="Self.Route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RouteSheet" Type="Self.RouteSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="RouteSheet">
+              <PropertyRef Name="RouteNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StopsOnTh__Route__30F848ED">
+          <End Role="Route" Type="Self.Route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StopsOnTheRoute" Type="Self.StopsOnTheRoute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="StopsOnTheRoute">
+              <PropertyRef Name="RouteNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StopsOnTh__StopI__31EC6D26">
+          <End Role="BusStop" Type="Self.BusStop" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StopsOnTheRoute" Type="Self.StopsOnTheRoute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusStop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StopsOnTheRoute">
+              <PropertyRef Name="StopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище PassengerCarCompanyModelContainer">
+          <EntitySet Name="Bus" EntityType="Self.Bus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BusStop" EntityType="Self.BusStop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RouteSheet" EntityType="Self.RouteSheet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StopsOnTheRoute" EntityType="Self.StopsOnTheRoute" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RouteShee__BusNu__38996AB5" Association="Self.FK__RouteShee__BusNu__38996AB5">
+            <End Role="Bus" EntitySet="Bus" />
+            <End Role="RouteSheet" EntitySet="RouteSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteShee__Drive__36B12243" Association="Self.FK__RouteShee__Drive__36B12243">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="RouteSheet" EntitySet="RouteSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteShee__Route__37A5467C" Association="Self.FK__RouteShee__Route__37A5467C">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteSheet" EntitySet="RouteSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StopsOnTh__Route__30F848ED" Association="Self.FK__StopsOnTh__Route__30F848ED">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="StopsOnTheRoute" EntitySet="StopsOnTheRoute" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StopsOnTh__StopI__31EC6D26" Association="Self.FK__StopsOnTh__StopI__31EC6D26">
+            <End Role="BusStop" EntitySet="BusStop" />
+            <End Role="StopsOnTheRoute" EntitySet="StopsOnTheRoute" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PassengerCarCompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bus">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Mark" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReleaseYear" Type="Int32" Nullable="false" />
+          <Property Name="Capacity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="RouteSheet" Relationship="Self.FK__RouteShee__BusNu__38996AB5" FromRole="Bus" ToRole="RouteSheet" />
+        </EntityType>
+        <EntityType Name="BusStop">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="StopsOnTheRoute" Relationship="Self.FK__StopsOnTh__StopI__31EC6D26" FromRole="BusStop" ToRole="StopsOnTheRoute" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="3" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RouteSheet" Relationship="Self.FK__RouteShee__Drive__36B12243" FromRole="Driver" ToRole="RouteSheet" />
+        </EntityType>
+        <EntityType Name="Route">
+          <Key>
+            <PropertyRef Name="Number" />
+          </Key>
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RouteLength" Type="Int32" Nullable="false" />
+          <Property Name="AverTravelTime" Type="Time" Nullable="false" Precision="0" />
+          <NavigationProperty Name="RouteSheet" Relationship="Self.FK__RouteShee__Route__37A5467C" FromRole="Route" ToRole="RouteSheet" />
+          <NavigationProperty Name="StopsOnTheRoute" Relationship="Self.FK__StopsOnTh__Route__30F848ED" FromRole="Route" ToRole="StopsOnTheRoute" />
+        </EntityType>
+        <EntityType Name="RouteSheet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DepartureTime" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="ArrivalTime" Type="Time" Nullable="false" Precision="0" />
+          <Property Name="PlannedProfit" Type="Int32" />
+          <Property Name="RealProfit" Type="Int32" Nullable="false" />
+          <Property Name="DriverNumber" Type="Int32" Nullable="false" />
+          <Property Name="RouteNumber" Type="Int32" Nullable="false" />
+          <Property Name="BusNumber" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Bus" Relationship="Self.FK__RouteShee__BusNu__38996AB5" FromRole="RouteSheet" ToRole="Bus" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK__RouteShee__Drive__36B12243" FromRole="RouteSheet" ToRole="Driver" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__RouteShee__Route__37A5467C" FromRole="RouteSheet" ToRole="Route" />
+        </EntityType>
+        <EntityType Name="StopsOnTheRoute">
+          <Key>
+            <PropertyRef Name="Number" />
+            <PropertyRef Name="RouteNumber" />
+          </Key>
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="RouteNumber" Type="Int32" Nullable="false" />
+          <Property Name="StopId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BusStop" Relationship="Self.FK__StopsOnTh__StopI__31EC6D26" FromRole="StopsOnTheRoute" ToRole="BusStop" />
+          <NavigationProperty Name="Route" Relationship="Self.FK__StopsOnTh__Route__30F848ED" FromRole="StopsOnTheRoute" ToRole="Route" />
+        </EntityType>
+        <Association Name="FK__RouteShee__BusNu__38996AB5">
+          <End Role="Bus" Type="Self.Bus" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RouteSheet" Type="Self.RouteSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bus">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="RouteSheet">
+              <PropertyRef Name="BusNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StopsOnTh__StopI__31EC6D26">
+          <End Role="BusStop" Type="Self.BusStop" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StopsOnTheRoute" Type="Self.StopsOnTheRoute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BusStop">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StopsOnTheRoute">
+              <PropertyRef Name="StopId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteShee__Drive__36B12243">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RouteSheet" Type="Self.RouteSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="RouteSheet">
+              <PropertyRef Name="DriverNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RouteShee__Route__37A5467C">
+          <End Role="Route" Type="Self.Route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RouteSheet" Type="Self.RouteSheet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="RouteSheet">
+              <PropertyRef Name="RouteNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StopsOnTh__Route__30F848ED">
+          <End Role="Route" Type="Self.Route" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StopsOnTheRoute" Type="Self.StopsOnTheRoute" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Route">
+              <PropertyRef Name="Number" />
+            </Principal>
+            <Dependent Role="StopsOnTheRoute">
+              <PropertyRef Name="RouteNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PassengerCarCompanyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bus" EntityType="Self.Bus" />
+          <EntitySet Name="BusStop" EntityType="Self.BusStop" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" />
+          <EntitySet Name="Route" EntityType="Self.Route" />
+          <EntitySet Name="RouteSheet" EntityType="Self.RouteSheet" />
+          <EntitySet Name="StopsOnTheRoute" EntityType="Self.StopsOnTheRoute" />
+          <AssociationSet Name="FK__RouteShee__BusNu__38996AB5" Association="Self.FK__RouteShee__BusNu__38996AB5">
+            <End Role="Bus" EntitySet="Bus" />
+            <End Role="RouteSheet" EntitySet="RouteSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StopsOnTh__StopI__31EC6D26" Association="Self.FK__StopsOnTh__StopI__31EC6D26">
+            <End Role="BusStop" EntitySet="BusStop" />
+            <End Role="StopsOnTheRoute" EntitySet="StopsOnTheRoute" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteShee__Drive__36B12243" Association="Self.FK__RouteShee__Drive__36B12243">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="RouteSheet" EntitySet="RouteSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RouteShee__Route__37A5467C" Association="Self.FK__RouteShee__Route__37A5467C">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="RouteSheet" EntitySet="RouteSheet" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StopsOnTh__Route__30F848ED" Association="Self.FK__StopsOnTh__Route__30F848ED">
+            <End Role="Route" EntitySet="Route" />
+            <End Role="StopsOnTheRoute" EntitySet="StopsOnTheRoute" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PassengerCarCompanyModelContainer" CdmEntityContainer="PassengerCarCompanyEntities">
+          <EntitySetMapping Name="Bus">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.Bus">
+              <MappingFragment StoreEntitySet="Bus">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="ReleaseYear" ColumnName="ReleaseYear" />
+                <ScalarProperty Name="Capacity" ColumnName="Capacity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BusStop">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.BusStop">
+              <MappingFragment StoreEntitySet="BusStop">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Driver">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Route">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.Route">
+              <MappingFragment StoreEntitySet="Route">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="RouteLength" ColumnName="RouteLength" />
+                <ScalarProperty Name="AverTravelTime" ColumnName="AverTravelTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RouteSheet">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.RouteSheet">
+              <MappingFragment StoreEntitySet="RouteSheet">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DepartureTime" ColumnName="DepartureTime" />
+                <ScalarProperty Name="ArrivalTime" ColumnName="ArrivalTime" />
+                <ScalarProperty Name="PlannedProfit" ColumnName="PlannedProfit" />
+                <ScalarProperty Name="RealProfit" ColumnName="RealProfit" />
+                <ScalarProperty Name="DriverNumber" ColumnName="DriverNumber" />
+                <ScalarProperty Name="RouteNumber" ColumnName="RouteNumber" />
+                <ScalarProperty Name="BusNumber" ColumnName="BusNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StopsOnTheRoute">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.StopsOnTheRoute">
+              <MappingFragment StoreEntitySet="StopsOnTheRoute">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="RouteNumber" ColumnName="RouteNumber" />
+                <ScalarProperty Name="StopId" ColumnName="StopId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
