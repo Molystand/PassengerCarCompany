@@ -64,33 +64,34 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Bus.cs">
+    <Compile Include="Entities\Bus.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="BusStop.cs">
+    <Compile Include="Entities\BusStop.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="BusWindow.xaml.cs">
+    <Compile Include="Windows\BusWindow.xaml.cs">
       <DependentUpon>BusWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Driver.cs">
+    <Compile Include="Entities\Driver.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="PassengerCarCompany.cs">
+    <Compile Include="Entities\PassengerCarCompany.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="Route.cs">
+    <Compile Include="Entities\Route.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="RouteSheet.cs">
+    <Compile Include="Entities\RouteSheet.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Compile Include="StopsOnTheRoute.cs">
+    <Compile Include="Entities\StopsOnTheRoute.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
-    <Page Include="BusWindow.xaml">
+    <Compile Include="Validation Rules\BusValidationRules.cs" />
+    <Page Include="Windows\BusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,12 +109,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PassengerCarCompany.Context.cs">
+    <Compile Include="Entities\PassengerCarCompany.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PassengerCarCompany.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PassengerCarCompany.Designer.cs">
+    <Compile Include="Entities\PassengerCarCompany.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PassengerCarCompany.edmx</DependentUpon>
@@ -135,12 +136,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="PassengerCarCompany.edmx">
+    <EntityDeploy Include="Entities\PassengerCarCompany.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PassengerCarCompany.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="packages.config" />
-    <None Include="PassengerCarCompany.edmx.diagram">
+    <None Include="Entities\PassengerCarCompany.edmx.diagram">
       <DependentUpon>PassengerCarCompany.edmx</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
@@ -155,16 +156,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PassengerCarCompany.Context.tt">
+    <Content Include="Entities\PassengerCarCompany.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>PassengerCarCompany.Context.cs</LastGenOutput>
       <DependentUpon>PassengerCarCompany.edmx</DependentUpon>
     </Content>
-    <Content Include="PassengerCarCompany.tt">
+    <Content Include="Entities\PassengerCarCompany.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PassengerCarCompany.edmx</DependentUpon>
       <LastGenOutput>PassengerCarCompany.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

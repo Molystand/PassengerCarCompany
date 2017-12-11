@@ -25,6 +25,7 @@ namespace PassengerCarCompany
     /// </summary>
     public partial class BusWindow : Window
     {
+        Bus selectedBus;
         ObservableCollection<Bus> lstBuses;
 
         #region Загрузка окна
@@ -32,11 +33,18 @@ namespace PassengerCarCompany
         public BusWindow()
         {
             InitializeComponent();
+
+            // Контекст данных для блока доп. информации.
+            selectedBus = new Bus();
+            gboxCurrBus.DataContext = selectedBus;
+
+            // Выбрать первую строку таблицы.
+            dgridBus.SelectedIndex = 0;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         #endregion
@@ -58,20 +66,29 @@ namespace PassengerCarCompany
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
                 (e.OldItems[0] as Bus).Delete();
-                //Bus.Delete(e.OldItems[0] as Bus);
             }
             // При добавлении элемента.
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
                 (e.NewItems[0] as Bus).Insert();
-                //Bus.Insert(e.NewItems[0] as Bus);
             }
             // При изменении элемента.
             else if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Replace)
             {
                 (e.OldItems[0] as Bus).Update(e.NewItems[0] as Bus);
-                //Bus.Update(e.OldItems[0] as Bus, e.NewItems[0] as Bus);
             }
+        }
+
+        // При выборе строки вывести подробную информацию.
+        private void dgridBus_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count <= 0 || dgridBus.SelectedItems.Count > 1 || dgridBus.Items.IndexOf(e.AddedItems[0]) >= lstBuses.Count)
+                return;
+
+            selectedBus.Number = ((Bus)e.AddedItems[0]).Number;
+            selectedBus.Mark = ((Bus)e.AddedItems[0]).Mark;
+            selectedBus.ReleaseYear = ((Bus)e.AddedItems[0]).ReleaseYear;
+            selectedBus.Capacity = ((Bus)e.AddedItems[0]).Capacity;
         }
 
         #endregion
@@ -98,29 +115,14 @@ namespace PassengerCarCompany
             }
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e)
-        {
-            lstBuses.Add(new Bus()
-            {
-                Number = "н293ом",
-                Mark = "Марка",
-                ReleaseYear = 2010,
-                Capacity = 42
-            });
-        }
+        private void btnAdd_Click(object sender, RoutedEventArgs e) => lstBuses.Add((Bus)selectedBus.Clone());
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
             int selected = dgridBus.SelectedIndex;
             if (selected != -1)
             {
-                lstBuses[selected] = new Bus
-                {
-                    Number = "н293ом",
-                    Mark = "Марка",
-                    ReleaseYear = 2010,
-                    Capacity = 42
-                };
+                lstBuses[selected] = (Bus)selectedBus.Clone();
             }
         }
 
