@@ -9,7 +9,7 @@ using System.Windows.Controls;
 
 namespace PassengerCarCompany
 {
-    class NumberValidRule : ValidationRule
+    class BusNumberValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -24,7 +24,7 @@ namespace PassengerCarCompany
         }
     }
 
-    class YearValidRule : ValidationRule
+    class BusYearValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -41,7 +41,7 @@ namespace PassengerCarCompany
         }
     }
 
-    class CapacityValidRule : ValidationRule
+    class BusCapacityValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

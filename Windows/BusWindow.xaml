@@ -80,40 +80,40 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Number" Margin="5"/>
-                <Label Content="Mark" Margin="5" Grid.Row="1"/>
-                <Label Content="ReleaseYear" Margin="5" Grid.Row="2"/>
-                <Label Content="Capacity" Margin="5" Grid.Row="3"/>
+                <Label Content="Номер" Margin="5"/>
+                <Label Content="Марка" Margin="5" Grid.Row="1"/>
+                <Label Content="Год выпуска" Margin="5" Grid.Row="2"/>
+                <Label Content="Вместимость" Margin="5" Grid.Row="3"/>
 
-                <TextBox Name="tboxNumber" Grid.Row="0" Grid.Column="1"><!--Validation.Error="ValidationError">-->
+                <TextBox Name="tboxNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
                         <Binding Path="Number" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
-                            <!--<Binding.ValidationRules>
-                                <local:NumberValidRule/>
-                            </Binding.ValidationRules>-->
+                            <Binding.ValidationRules>
+                                <local:BusNumberValidRule/>
+                            </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
                 <TextBox Name="tboxMark" Grid.Row="1" Grid.Column="1"
                          Text="{Binding Path=Mark, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBox Name="tboxYear" Grid.Row="2" Grid.Column="1"><!--Validation.Error="ValidationError">-->
+                <TextBox Name="tboxYear" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
                         <Binding Path="ReleaseYear" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
-                            <!--<Binding.ValidationRules>
-                                <local:YearValidRule/>
-                            </Binding.ValidationRules>-->
+                            <Binding.ValidationRules>
+                                <local:BusYearValidRule/>
+                            </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Name="tboxCapacity" Grid.Row="3" Grid.Column="1"><!--Validation.Error="ValidationError">-->
+                <TextBox Name="tboxCapacity" Grid.Row="3" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
                         <Binding Path="Capacity" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
-                            <!--<Binding.ValidationRules>
-                                <local:CapacityValidRule/>
-                            </Binding.ValidationRules>-->
+                            <Binding.ValidationRules>
+                                <local:BusCapacityValidRule/>
+                            </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>

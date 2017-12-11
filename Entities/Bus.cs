@@ -30,8 +30,6 @@ namespace PassengerCarCompany
 
         public void Insert()
         {
-            // Возможная валидация.
-
             using (var db = new PassengerCarCompanyEntities())
             {
                 // Есть ли такая запись в БД.

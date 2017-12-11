@@ -115,7 +115,19 @@ namespace PassengerCarCompany
             }
         }
 
-        private void btnAdd_Click(object sender, RoutedEventArgs e) => lstBuses.Add((Bus)selectedBus.Clone());
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            if (tbErrorInfo.Text != string.Empty)
+                return;
+
+            if (Bus.Get(selectedBus.Number) != null)
+            {
+                MessageBox.Show("Автобус с таким номером уже есть в БД", "Ошибка");
+                return;
+            }
+                
+            lstBuses.Add((Bus)selectedBus.Clone());
+        }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
@@ -167,5 +179,27 @@ namespace PassengerCarCompany
         }
 
         #endregion
+
+        private void ValidationError(object sender, ValidationErrorEventArgs e)
+        {
+            tbErrorInfo.Text = string.Empty;
+            foreach (object child in LogicalTreeHelper.GetChildren(gridInfo))
+            {
+                // Для всех TextBox из потомков gridInfo.
+                TextBox element = child as TextBox;
+                if (element == null)
+                    continue;
+
+                // Если есть ошибки.
+                if (Validation.GetHasError(element))
+                {
+                    // Вывести все ошибки.
+                    foreach (var error in Validation.GetErrors(element))
+                    {
+                        tbErrorInfo.Text += $"{error.ErrorContent.ToString()}\n";
+                    }
+                }
+            }
+        }
     }
 }
