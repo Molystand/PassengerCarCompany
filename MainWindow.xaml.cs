@@ -50,6 +50,17 @@ namespace PassengerCarCompany
             window.ShowDialog();
         }
 
+        private void btnBusStopTable_Click(object sender, RoutedEventArgs e)
+        {
+            BusStopWindow window = new BusStopWindow()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+        }
+
         #endregion
+
+
     }
 }

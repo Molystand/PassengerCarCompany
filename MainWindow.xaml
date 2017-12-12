@@ -17,14 +17,7 @@
         </Grid.RowDefinitions>
 
         <Button Name="btnBusTable" Content="Таблица Bus" Click="btnBusTable_Click"/>
+        <Button Name="btnBusStopTable" Content="Таблица BusStop" Click="btnBusStopTable_Click"
+                Grid.Row="1"/>
     </Grid>
 </Window>
-
-
-
-<!--<Button Name="btnRoute" Content="Показать маршруты" Click="btnRoute_Click"/>
-            <Button Name="btnStop" Grid.Column="1" Content="Показать остановки" Click="btnStop_Click"/>
-            <Button Name="btnAdd" Grid.Column="2" Content="Новая запись" Click="btnAdd_Click"/>
-            <Button Name="btnDel" Grid.Column="3" Content="Удалить запись" Click="btnDel_Click"/>
-            <Button Name="btnUpdate" Grid.Column="4" Content="Изменить запись" Click="btnUpdate_Click"/>
-            <Button Name="btnUpdateData" Grid.Column="5" Content="Обновить записи" Click="UpdateData"/>-->

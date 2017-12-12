@@ -70,6 +70,7 @@
     <Compile Include="Entities\BusStop.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
+    <Compile Include="Validation Rules\BusStopValidationRules.cs" />
     <Compile Include="Windows\BusStopWindow.xaml.cs">
       <DependentUpon>BusStopWindow.xaml</DependentUpon>
     </Compile>

@@ -194,6 +194,17 @@ namespace PassengerCarCompany
             }
         }
 
+        public static BusStop Get(string title)
+        {
+            using (var db = new PassengerCarCompanyEntities())
+            {
+                return (from bs in db.BusStop
+                        where bs.Title == title
+                        select bs)
+                        .FirstOrDefault();
+            }
+        }
+
         #endregion
 
         #endregion
