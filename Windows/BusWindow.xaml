@@ -4,24 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
+        xmlns:valid="clr-namespace:PassengerCarCompany.BusValidationRules"
         mc:Ignorable="d"
         Title="BusWindow" Height="400" Width="640"
         Loaded="Window_Loaded">
-    <Window.Resources>
-        <Style TargetType="TextBox">
-            <Setter Property="TextWrapping" Value="Wrap"/>
-            <Setter Property="Margin" Value="5"/>
-            <Style.Triggers>
-                <Trigger Property="Validation.HasError" Value="True">
-                    <Setter Property="ToolTip"
-                        Value="{Binding RelativeSource={RelativeSource Self},
-                                Path=(Validation.Errors)[0].ErrorContent}"/>
-                    <Setter Property="Foreground" Value="Red"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="180"/>
@@ -37,10 +23,10 @@
         <DataGrid Name="dgridBus" AutoGenerateColumns="False" Grid.RowSpan="3"
                   Loaded="UpdateData" SelectionChanged="dgridBus_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Number" Binding="{Binding Number}"/>
-                <DataGridTextColumn Header="Mark" Binding="{Binding Mark}"/>
-                <DataGridTextColumn Header="ReleaseYear" Binding="{Binding ReleaseYear}"/>
-                <DataGridTextColumn Header="Capacity" Binding="{Binding Capacity}"/>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="Год выпуска" Binding="{Binding ReleaseYear}"/>
+                <DataGridTextColumn Header="Вместимость" Binding="{Binding Capacity}"/>
+                <DataGridTextColumn Header="Марка" Binding="{Binding Mark}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
@@ -90,7 +76,7 @@
                         <Binding Path="Number" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <local:BusNumberValidRule/>
+                                <valid:NumberValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -102,7 +88,7 @@
                         <Binding Path="ReleaseYear" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <local:BusYearValidRule/>
+                                <valid:YearValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -112,7 +98,7 @@
                         <Binding Path="Capacity" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <local:BusCapacityValidRule/>
+                                <valid:CapacityValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -124,15 +110,5 @@
         <TextBlock Name="tbErrorInfo" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center"
                    TextWrapping="Wrap" Foreground="Red" Width="Auto" Height="Auto" Margin="10"/>
 
-
     </Grid>
 </Window>
-
-
-
-<!--<Button Name="btnRoute" Content="Показать маршруты" Click="btnRoute_Click"/>
-            <Button Name="btnStop" Grid.Column="1" Content="Показать остановки" Click="btnStop_Click"/>
-            <Button Name="btnAdd" Grid.Column="2" Content="Новая запись" Click="btnAdd_Click"/>
-            <Button Name="btnDel" Grid.Column="3" Content="Удалить запись" Click="btnDel_Click"/>
-            <Button Name="btnUpdate" Grid.Column="4" Content="Изменить запись" Click="btnUpdate_Click"/>
-            <Button Name="btnUpdateData" Grid.Column="5" Content="Обновить записи" Click="UpdateData"/>-->

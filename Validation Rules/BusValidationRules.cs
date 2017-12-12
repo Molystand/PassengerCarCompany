@@ -7,9 +7,9 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 
-namespace PassengerCarCompany
+namespace PassengerCarCompany.BusValidationRules
 {
-    class BusNumberValidRule : ValidationRule
+    class NumberValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -24,7 +24,7 @@ namespace PassengerCarCompany
         }
     }
 
-    class BusYearValidRule : ValidationRule
+    class YearValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
@@ -41,7 +41,7 @@ namespace PassengerCarCompany
         }
     }
 
-    class BusCapacityValidRule : ValidationRule
+    class CapacityValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {

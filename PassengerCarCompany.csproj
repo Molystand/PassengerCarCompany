@@ -70,6 +70,9 @@
     <Compile Include="Entities\BusStop.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
+    <Compile Include="Windows\BusStopWindow.xaml.cs">
+      <DependentUpon>BusStopWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\BusWindow.xaml.cs">
       <DependentUpon>BusWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,22 @@
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
     <Compile Include="Validation Rules\BusValidationRules.cs" />
+    <Compile Include="Windows\DriverWindow.xaml.cs">
+      <DependentUpon>DriverWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RouteSheetWindow.xaml.cs">
+      <DependentUpon>RouteSheetWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\RouteWindow.xaml.cs">
+      <DependentUpon>RouteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\StopsOnTheRouteWindow.xaml.cs">
+      <DependentUpon>StopsOnTheRouteWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Windows\BusStopWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\BusWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -107,6 +126,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\DriverWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RouteSheetWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\RouteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\StopsOnTheRouteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\PassengerCarCompany.Context.cs">

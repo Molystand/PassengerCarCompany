@@ -1,28 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Data.Entity.Core;
-using System.Data.Entity.Core.EntityClient;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PassengerCarCompany
 {
-    /// <summary>
-    /// Логика взаимодействия для BusWindow.xaml
-    /// </summary>
     public partial class BusWindow : Window
     {
         Bus selectedBus;
@@ -79,6 +64,10 @@ namespace PassengerCarCompany
             }
         }
 
+        #endregion
+
+        #region Подробная информация
+
         // При выборе строки вывести подробную информацию.
         private void dgridBus_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -89,6 +78,28 @@ namespace PassengerCarCompany
             selectedBus.Mark = ((Bus)e.AddedItems[0]).Mark;
             selectedBus.ReleaseYear = ((Bus)e.AddedItems[0]).ReleaseYear;
             selectedBus.Capacity = ((Bus)e.AddedItems[0]).Capacity;
+        }
+
+        private void ValidationError(object sender, ValidationErrorEventArgs e)
+        {
+            tbErrorInfo.Text = string.Empty;
+            foreach (object child in LogicalTreeHelper.GetChildren(gridInfo))
+            {
+                // Для всех TextBox из потомков gridInfo.
+                TextBox element = child as TextBox;
+                if (element == null)
+                    continue;
+
+                // Если есть ошибки.
+                if (Validation.GetHasError(element))
+                {
+                    // Вывести все ошибки.
+                    foreach (var error in Validation.GetErrors(element))
+                    {
+                        tbErrorInfo.Text += $"{error.ErrorContent.ToString()}\n";
+                    }
+                }
+            }
         }
 
         #endregion
@@ -179,27 +190,5 @@ namespace PassengerCarCompany
         }
 
         #endregion
-
-        private void ValidationError(object sender, ValidationErrorEventArgs e)
-        {
-            tbErrorInfo.Text = string.Empty;
-            foreach (object child in LogicalTreeHelper.GetChildren(gridInfo))
-            {
-                // Для всех TextBox из потомков gridInfo.
-                TextBox element = child as TextBox;
-                if (element == null)
-                    continue;
-
-                // Если есть ошибки.
-                if (Validation.GetHasError(element))
-                {
-                    // Вывести все ошибки.
-                    foreach (var error in Validation.GetErrors(element))
-                    {
-                        tbErrorInfo.Text += $"{error.ErrorContent.ToString()}\n";
-                    }
-                }
-            }
-        }
     }
 }
