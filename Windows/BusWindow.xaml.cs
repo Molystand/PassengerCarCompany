@@ -82,6 +82,8 @@ namespace PassengerCarCompany
 
         private void ValidationError(object sender, ValidationErrorEventArgs e)
         {
+            int selected = dgridBus.SelectedIndex;
+
             tbErrorInfo.Text = string.Empty;
             foreach (object child in LogicalTreeHelper.GetChildren(gridInfo))
             {
@@ -152,38 +154,25 @@ namespace PassengerCarCompany
         // Восстановить таблицу автобусов.
         private void btnRestoreTable_Click(object sender, RoutedEventArgs e)
         {
-            // Установка соединения с БД.
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Sql Server"].ConnectionString))
+            using (var db = new PassengerCarCompanyEntities())
             {
-                conn.Open();
-
-                SqlCommand cmd = new SqlCommand();
-
-                // Удалить все записи из таблицы.
-                string cmdText = @"DELETE FROM Bus";
-                cmd.CommandText = cmdText;
-                cmd.Connection = conn;
-                cmd.ExecuteNonQuery();
-
-                // Заполнение таблицы заново.
-                cmdText = @"INSERT INTO Bus(Number, Mark, ReleaseYear, Capacity)
-			                VALUES('у204то', 'ПАЗ-3205',	  2016, 42),
-			                	  ('о548лд', 'ПАЗ-320412-05', 2012, 60),
-			                	  ('з645ал', 'МАЗ-206',		  2009, 72),
-			                	  ('ж784не', 'ПАЗ-4234',	  2013, 50),
-			                	  ('и134да', 'ЛиАЗ-429260',	  2008, 75),
-			                	  ('к683вы', 'ПАЗ-4234',	  2010, 50),
-			                	  ('е432ыф', 'ПАЗ-32053',	  2006, 43),
-			                	  ('п454тр', 'МАЗ-256',		  2007, 43),
-			                	  ('о908па', 'ПАЗ-320412-05', 2016, 60),
-			                	  ('п456ва', 'ПАЗ-3205',	  2005, 42),
-			                	  ('ч823ор', 'ПАЗ-3205',	  2014, 42),
-			                	  ('с859вд', 'ПАЗ-320412-05', 2011, 60),
-			                	  ('т134уц', 'ПАЗ-3205',	  2012, 42),
-			                	  ('ф083ув', 'ПАЗ-32053',	  2009, 43),
-			                	  ('г752сн', 'ПАЗ-32054',	  2007, 43)";
-                cmd.CommandText = cmdText;
-                cmd.ExecuteNonQuery();
+                db.Database.ExecuteSqlCommand("DELETE FROM Bus");
+                db.Database.ExecuteSqlCommand(@"INSERT INTO Bus(Number, Mark, ReleaseYear, Capacity)
+                                                VALUES('у204то', 'ПАЗ-3205',	  2016, 42),
+                   	                                  ('о548лд', 'ПАЗ-320412-05', 2012, 60),
+                   	                                  ('з645ал', 'МАЗ-206',		  2009, 72),
+                   	                                  ('ж784не', 'ПАЗ-4234',	  2013, 50),
+                   	                                  ('и134да', 'ЛиАЗ-429260',	  2008, 75),
+                   	                                  ('к683вы', 'ПАЗ-4234',	  2010, 50),
+                   	                                  ('е432ыф', 'ПАЗ-32053',	  2006, 43),
+                   	                                  ('п454тр', 'МАЗ-256',		  2007, 43),
+                   	                                  ('о908па', 'ПАЗ-320412-05', 2016, 60),
+                   	                                  ('п456ва', 'ПАЗ-3205',	  2005, 42),
+                   	                                  ('ч823ор', 'ПАЗ-3205',	  2014, 42),
+                   	                                  ('с859вд', 'ПАЗ-320412-05', 2011, 60),
+                   	                                  ('т134уц', 'ПАЗ-3205',	  2012, 42),
+                   	                                  ('ф083ув', 'ПАЗ-32053',	  2009, 43),
+                   	                                  ('г752сн', 'ПАЗ-32054',	  2007, 43)");
             }
 
             UpdateData(sender, e);
