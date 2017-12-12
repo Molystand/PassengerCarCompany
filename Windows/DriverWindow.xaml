@@ -3,10 +3,163 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PassengerCarCompany"
+        xmlns:local="clr-namespace:PassengerCarCompany.Windows"
+        xmlns:valid="clr-namespace:PassengerCarCompany.DriverValidationRules"
         mc:Ignorable="d"
-        Title="DriverWindow" Height="300" Width="300">
+        Title="DriverWindow" Height="450" Width="840">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition MinHeight="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="500"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Основная информация-->
+        <DataGrid Name="dgridDriver" AutoGenerateColumns="False" Grid.RowSpan="3"
+                  Loaded="UpdateData" SelectionChanged="dgridDriver_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding Sex}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" Width="*"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Name}" Width="*"/>
+                <!--<DataGridTextColumn Header="Дата рождения" Binding="{Binding Birthdate}"/>-->
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--Кнопки-->
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Name="btnAdd" Content="Новая запись" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnAdd_Click" />
+            <Button Grid.Row="0" Grid.Column="1" Name="btnDel" Content="Удалить" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnDel_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" Name="btnUpdate" Content="Изменить" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnUpdate_Click"  />
+            <Button Grid.Row="1" Grid.Column="0" Name="btnRestoreTable" Content="Восстановить" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnRestoreTable_Click"/>
+        </Grid>
+
+        <!--Дополнительная информация-->
+        <GroupBox Header="Текущая запись" HorizontalAlignment="Center"  Margin="10" Grid.Row="0" Grid.Column="1"
+                  Name="gboxCurrDriver" VerticalAlignment="Top" MinWidth="400">
+            <Grid Name="gridInfo">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Номер" Margin="5" Grid.Row="0"/>
+                <Label Content="Фамилия" Margin="5" Grid.Row="1"/>
+                <Label Content="Имя" Margin="5" Grid.Row="2"/>
+                <Label Content="Отчество" Margin="5" Grid.Row="3"/>
+                <Label Content="Пол" Margin="5" Grid.Row="0" Grid.Column="2"/>
+                <Label Content="Дата рождения" Margin="5" Grid.Row="1" Grid.Column="2"/>
+                <Label Content="Номер телефона" Margin="5" Grid.Row="2" Grid.Column="2"/>
+                <Label Content="Адрес" Margin="5" Grid.Row="3" Grid.Column="2"/>
+
+                <TextBox Name="tboxNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Number" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxSurname" Grid.Row="1" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Surname" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:SurnameValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxName" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Name" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NameValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxPatronymic" Grid.Row="3" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Patronymic" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:PatronymicValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <ComboBox Name="cboxSex" Grid.Row="0" Grid.Column="3" Validation.Error="ValidationError"
+                          Margin="5" SelectionChanged="cboxSex_SelectionChanged">
+                    <ComboBoxItem Name="itemMan" Content="муж"/>
+                    <ComboBoxItem Name="itemWoman" Content="жен"/>
+                </ComboBox>
+                <DatePicker Name="dateBirthDate" Grid.Row="1" Grid.Column="3" Validation.Error="ValidationError"
+                            SelectedDateFormat="Short" Margin="5">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="Birthdate" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:BirthdateValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                    
+                </DatePicker>
+                <TextBox Name="tboxPhoneNumber" Grid.Row="2" Grid.Column="3" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="PhoneNumber" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:PhoneNumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxAddress" Grid.Row="3" Grid.Column="3" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Address" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:AddressValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+        </GroupBox>
+
+        <!--Информация об ошибках-->
+        <TextBlock Name="tbErrorInfo" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center"
+                   TextWrapping="Wrap" Foreground="Red" Width="Auto" Height="Auto" Margin="10"/>
+
     </Grid>
 </Window>

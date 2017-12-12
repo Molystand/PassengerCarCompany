@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PassengerCarCompany
+namespace PassengerCarCompany.Windows
 {
     public partial class BusWindow : Window
     {
@@ -25,11 +25,6 @@ namespace PassengerCarCompany
 
             // Выбрать первую строку таблицы.
             dgridBus.SelectedIndex = 0;
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         #endregion

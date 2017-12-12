@@ -6,12 +6,12 @@ using System.Data.SqlClient;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace PassengerCarCompany
+namespace PassengerCarCompany.Windows
 {
     public partial class BusStopWindow : Window
     {
         BusStop selectedBusStop;
-        ObservableCollection<BusStop> lstBusStopes;
+        ObservableCollection<BusStop> lstBusStop;
 
         #region Загрузка окна
 
@@ -27,11 +27,6 @@ namespace PassengerCarCompany
             dgridBusStop.SelectedIndex = 0;
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         #endregion
 
         #region Работа со списком данных
@@ -39,13 +34,13 @@ namespace PassengerCarCompany
         // Заполнение списка.
         private void UpdateData(object sender, RoutedEventArgs e)
         {
-            lstBusStopes = new ObservableCollection<BusStop>(BusStop.Get());
-            dgridBusStop.ItemsSource = lstBusStopes;
-            lstBusStopes.CollectionChanged += LstBusStopes_CollectionChanged;
+            lstBusStop = new ObservableCollection<BusStop>(BusStop.Get());
+            dgridBusStop.ItemsSource = lstBusStop;
+            lstBusStop.CollectionChanged += lstBusStop_CollectionChanged;
         }
 
         // Событие изменения списка данных.
-        private void LstBusStopes_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void lstBusStop_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             // При удалении элемента.
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
@@ -71,7 +66,7 @@ namespace PassengerCarCompany
         // При выборе строки вывести подробную информацию.
         private void dgridBusStop_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count <= 0 || dgridBusStop.SelectedItems.Count > 1 || dgridBusStop.Items.IndexOf(e.AddedItems[0]) >= lstBusStopes.Count)
+            if (e.AddedItems.Count <= 0 || dgridBusStop.SelectedItems.Count > 1 || dgridBusStop.Items.IndexOf(e.AddedItems[0]) >= lstBusStop.Count)
                 return;
 
             selectedBusStop.Id = ((BusStop)e.AddedItems[0]).Id;
@@ -115,13 +110,13 @@ namespace PassengerCarCompany
             {
                 // Количество выбранных элементов.
                 int count = dgridBusStop.SelectedItems.Count;
-                if (count > lstBusStopes.Count)
-                    count = lstBusStopes.Count;
+                if (count > lstBusStop.Count)
+                    count = lstBusStop.Count;
 
                 for (int i = 0; i < count; i++)
                 {
                     // Удаляем из теблицы.
-                    lstBusStopes.Remove((BusStop)dgridBusStop.SelectedItem);
+                    lstBusStop.Remove((BusStop)dgridBusStop.SelectedItem);
                 }
             }
         }
@@ -137,7 +132,7 @@ namespace PassengerCarCompany
                 return;
             }
 
-            lstBusStopes.Add((BusStop)selectedBusStop.Clone());
+            lstBusStop.Add((BusStop)selectedBusStop.Clone());
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
@@ -145,7 +140,7 @@ namespace PassengerCarCompany
             int selected = dgridBusStop.SelectedIndex;
             if (selected != -1)
             {
-                lstBusStopes[selected] = (BusStop)selectedBusStop.Clone();
+                lstBusStop[selected] = (BusStop)selectedBusStop.Clone();
             }
         }
 

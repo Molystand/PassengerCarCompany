@@ -158,37 +158,6 @@ namespace PassengerCarCompany
 
             if (newEntry != null)
             {
-                // Установка соединения с БД.
-                //using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Sql Server"].ConnectionString))
-                //{
-                //    conn.Open();
-
-                //    // Формирование запроса к БД.
-                //    SqlCommand cmd = new SqlCommand();
-
-                //    string cmdText;
-                //    cmd.Connection = conn;
-
-                //    cmdText = @"UPDATE Bus
-                //                SET Number = @number, Mark = @mark, ReleaseYear = @year, Capacity = @capacity
-                //                WHERE Number = @oldNumber";
-                //    cmd.CommandText = cmdText;
-                //    cmd.Parameters.AddWithValue("number", newEntry.Number);
-                //    cmd.Parameters.AddWithValue("mark", newEntry.Mark);
-                //    cmd.Parameters.AddWithValue("year", newEntry.ReleaseYear);
-                //    cmd.Parameters.AddWithValue("capacity", newEntry.Capacity);
-                //    cmd.Parameters.AddWithValue("oldNumber", this.Number);
-
-                //    try
-                //    {
-                //        cmd.ExecuteNonQuery();
-                //    }
-                //    catch (SqlException ex)
-                //    {
-                //        //MessageBox.Show(ex.Message);
-                //    }
-                //}
-
                 using (var db = new PassengerCarCompanyEntities())
                 {
                     db.Database.ExecuteSqlCommand(@"UPDATE Bus

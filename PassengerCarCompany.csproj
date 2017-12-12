@@ -71,6 +71,10 @@
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
     <Compile Include="Validation Rules\BusStopValidationRules.cs" />
+    <Compile Include="Validation Rules\DriverValidationRules.cs" />
+    <Compile Include="Validation Rules\RouteSheetValidationRules.cs" />
+    <Compile Include="Validation Rules\RouteValidationRules.cs" />
+    <Compile Include="Validation Rules\StopsOnTheRouteValidationRules.cs" />
     <Compile Include="Windows\BusStopWindow.xaml.cs">
       <DependentUpon>BusStopWindow.xaml</DependentUpon>
     </Compile>

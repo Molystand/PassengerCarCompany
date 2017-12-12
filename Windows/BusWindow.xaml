@@ -1,4 +1,4 @@
-﻿<Window x:Class="PassengerCarCompany.BusWindow"
+﻿<Window x:Class="PassengerCarCompany.Windows.BusWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,8 +6,7 @@
         xmlns:local="clr-namespace:PassengerCarCompany"
         xmlns:valid="clr-namespace:PassengerCarCompany.BusValidationRules"
         mc:Ignorable="d"
-        Title="BusWindow" Height="400" Width="640"
-        Loaded="Window_Loaded">
+        Title="BusWindow" Height="400" Width="640">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="180"/>

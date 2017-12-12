@@ -130,40 +130,18 @@ namespace PassengerCarCompany
 
         public void Update(BusStop newEntry)
         {
-            // Возможная валидация.
-
             if (newEntry != null)
             {
-                // Установка соединения с БД.
-                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["Sql Server"].ConnectionString))
+                using (var db = new PassengerCarCompanyEntities())
                 {
-                    conn.Open();
-
-                    // Формирование запроса к БД.
-                    SqlCommand cmd = new SqlCommand();
-
-                    string cmdText;
-                    cmd.Connection = conn;
-
-                    cmdText = @"UPDATE BusStop
-                                SET Id = @id, Title = @title
-                                WHERE Id = @oldId";
-                    cmd.CommandText = cmdText;
-                    cmd.Parameters.AddWithValue("id", newEntry.Id);
-                    cmd.Parameters.AddWithValue("title", newEntry.Title);
-                    cmd.Parameters.AddWithValue("oldId", this.Id);
-
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                    }
-                    catch (SqlException ex)
-                    {
-                        //MessageBox.Show(ex.Message);
-                    }
+                    db.Database.ExecuteSqlCommand(@"UPDATE BusStop
+                                                    SET Id = @id, Title = @title
+                                                    WHERE Id = @oldId",
+                                                    new SqlParameter("id", newEntry.Id),
+                                                    new SqlParameter("title", newEntry.Title),
+                                                    new SqlParameter("oldId", this.Id));
                 }
             }
-
         }
 
         public static void Update(Bus updEntry, Bus newEntry)

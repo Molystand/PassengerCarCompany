@@ -1,22 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using System.Data.Entity.Core;
-using System.Data.Entity.Core.EntityClient;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using PassengerCarCompany.Windows;
 
 namespace PassengerCarCompany
 {
@@ -59,8 +42,43 @@ namespace PassengerCarCompany
             window.ShowDialog();
         }
 
+
+        private void btnDriverTable_Click(object sender, RoutedEventArgs e)
+        {
+            DriverWindow window = new DriverWindow()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+        }
+
+        private void btnRouteTable_Click(object sender, RoutedEventArgs e)
+        {
+            BusStopWindow window = new BusStopWindow()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+        }
+
+        private void btnRouteSheetTable_Click(object sender, RoutedEventArgs e)
+        {
+            BusStopWindow window = new BusStopWindow()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+        }
+
+        private void btnStopsOnTheRouteTable_Click(object sender, RoutedEventArgs e)
+        {
+            BusStopWindow window = new BusStopWindow()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+        }
+
         #endregion
-
-
     }
 }
