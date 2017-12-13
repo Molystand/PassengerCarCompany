@@ -8,8 +8,10 @@ namespace PassengerCarCompany
     using System.Data.SqlClient;
     using System.Linq;
 
-    public partial class RouteSheet
+    public partial class RouteSheet : INotifyPropertyChanged, ICloneable
     {
+        public RouteSheet() { }
+
         public RouteSheet(int id, int number, DateTime date, TimeSpan departureTime, TimeSpan arrivalTime, int? plannedProfit, int realProfit, int driverNumber, int routeNumber, string busNumber)
         {
             Id            = id;
@@ -94,7 +96,7 @@ namespace PassengerCarCompany
 
         public int? PlannedProfit
         {
-            get { return id; }
+            get { return plannedProfit; }
             set
             {
                 plannedProfit = value;

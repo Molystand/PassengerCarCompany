@@ -8,7 +8,7 @@ namespace PassengerCarCompany
     using System.Data.SqlClient;
     using System.Linq;
 
-    public partial class Route
+    public partial class Route : INotifyPropertyChanged, ICloneable
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Route()
@@ -163,7 +163,7 @@ namespace PassengerCarCompany
                 {
                     db.Database.ExecuteSqlCommand(@"UPDATE Route
                                                     SET Number = @number, Title = @title, RouteLength = @len, AverTravelTime = @averTravelTime
-                                                    WHERE Number = @oldId",
+                                                    WHERE Number = @oldNumber",
                                                     new SqlParameter("number",         newEntry.Number),
                                                     new SqlParameter("title",          newEntry.Title),
                                                     new SqlParameter("len",            newEntry.RouteLength),

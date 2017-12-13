@@ -4,9 +4,178 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
+        xmlns:valid="clr-namespace:PassengerCarCompany.RouteSheetValidationRules"
+        xmlns:drValid="clr-namespace:PassengerCarCompany.DriverValidationRules"
+        xmlns:rValid="clr-namespace:PassengerCarCompany.RouteValidationRules"
+        xmlns:bValid="clr-namespace:PassengerCarCompany.BusValidationRules"
         mc:Ignorable="d"
-        Title="RouteSheetWindow" Height="300" Width="300">
+        Title="RouteSheetWindow" Height="450" Width="1000">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="230"/>
+            <RowDefinition Height="80"/>
+            <RowDefinition MinHeight="100"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="550"/>
+        </Grid.ColumnDefinitions>
+
+        <!--Основная информация-->
+        <DataGrid Name="dgridRouteSheet" AutoGenerateColumns="False" Grid.RowSpan="3"
+                  Loaded="UpdateData" SelectionChanged="dgridRouteSheet_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"/>
+                <DataGridTextColumn Header="№ водителя" Binding="{Binding DriverNumber}"/>
+                <DataGridTextColumn Header="№ маршрута" Binding="{Binding RouteNumber}"/>
+                <DataGridTextColumn Header="№ автобуса" Binding="{Binding BusNumber}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--Кнопки-->
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Row="0" Grid.Column="0" Name="btnAdd" Content="Новая запись" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnAdd_Click" />
+            <Button Grid.Row="0" Grid.Column="1" Name="btnDel" Content="Удалить" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnDel_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" Name="btnUpdate" Content="Изменить" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnUpdate_Click"  />
+            <Button Grid.Row="1" Grid.Column="0" Name="btnRestoreTable" Content="Восстановить" Margin="5"
+                HorizontalAlignment="Center" VerticalAlignment="Center" Width="87" Height="20" Click="btnRestoreTable_Click"/>
+        </Grid>
+
+        <!--Дополнительная информация-->
+        <GroupBox Header="Текущая запись" HorizontalAlignment="Center" Margin="10" Grid.Row="0" Grid.Column="1"
+                  Name="gboxCurrRouteSheet" VerticalAlignment="Top" MinWidth="450">
+            <Grid Name="gridInfo">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Label Content="Номер" Margin="5" Grid.Row="0"/>
+                <Label Content="Дата" Margin="5" Grid.Row="1"/>
+                <Label Content="№ водителя" Margin="5" Grid.Row="2"/>
+                <Label Content="№ маршрута" Margin="5" Grid.Row="3"/>
+                <Label Content="№ автобуса" Margin="5" Grid.Row="4"/>
+                <Label Content="Время отправления" Margin="5" Grid.Row="0" Grid.Column="2"/>
+                <Label Content="Время прибытия" Margin="5" Grid.Row="1" Grid.Column="2"/>
+                <Label Content="Рассчётая прибыль" Margin="5" Grid.Row="2" Grid.Column="2"/>
+                <Label Content="Факт. прибыль" Margin="5" Grid.Row="3" Grid.Column="2"/>
+
+                <TextBox Name="tboxNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Number" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <DatePicker Name="dpickDate" Grid.Row="1" Grid.Column="1" Validation.Error="ValidationError"
+                            SelectedDateFormat="Short" Margin="5">
+                    <DatePicker.SelectedDate>
+                        <Binding Path="Date" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                        </Binding>
+                    </DatePicker.SelectedDate>
+                </DatePicker>
+                <TextBox Name="tboxDriverNumber" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="DriverNumber" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <drValid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxRouteNumber" Grid.Row="3" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="RouteNumber" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <rValid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxBusNumber" Grid.Row="4" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="BusNumber" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <rValid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxDepartureTime" Grid.Row="0" Grid.Column="3" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="DepartureTime" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxArrivalTime" Grid.Row="1" Grid.Column="3" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="ArrivalTime" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxPlannedProfit" Grid.Row="2" Grid.Column="3" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="PlannedProfit" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox Name="tboxRealProfit" Grid.Row="3" Grid.Column="3" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="RealProfit" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:NumberValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+        </GroupBox>
+
+        <!--Информация об ошибках-->
+        <TextBlock Name="tbErrorInfo" Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Center"
+                   TextWrapping="Wrap" Foreground="Red" Width="Auto" Height="Auto" Margin="10"/>
+
     </Grid>
 </Window>

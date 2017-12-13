@@ -8,8 +8,11 @@ namespace PassengerCarCompany
     using System.Data.SqlClient;
     using System.Linq;
 
-    public partial class StopsOnTheRoute
+    public partial class StopsOnTheRoute : INotifyPropertyChanged, ICloneable
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public StopsOnTheRoute() { }
+
         public StopsOnTheRoute(int number, int routeNumber, int stopId)
         {
             Number      = number;
@@ -44,6 +47,10 @@ namespace PassengerCarCompany
             set
             {
                 routeNumber = value;
+                using (var db = new PassengerCarCompanyEntities())
+                {
+                    RouteTitle = db.Route.Find(routeNumber).Title;
+                }
                 OnPropertyChanged("RouteNumber");
             }
         }
@@ -54,15 +61,18 @@ namespace PassengerCarCompany
             set
             {
                 stopId = value;
+                using (var db = new PassengerCarCompanyEntities())
+                {
+                    StopTitle = db.BusStop.Find(stopId).Title;
+                }
                 OnPropertyChanged("StopId");
             }
         }
 
 
+        public string RouteTitle { get; set; }
 
-        public string RouteTitle { get { return this.Route.Title; } }
-
-        public string StopTitle { get { return this.BusStop.Title; } }
+        public string StopTitle { get; set; }
 
 
 

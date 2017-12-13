@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="300"
-        Loaded="Window_Loaded">
+        Title="MainWindow" Height="400" Width="300">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>

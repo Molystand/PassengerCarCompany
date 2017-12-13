@@ -15,11 +15,6 @@ namespace PassengerCarCompany
             InitializeComponent();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         #endregion
 
         #region Клики
@@ -54,7 +49,7 @@ namespace PassengerCarCompany
 
         private void btnRouteTable_Click(object sender, RoutedEventArgs e)
         {
-            BusStopWindow window = new BusStopWindow()
+            RouteWindow window = new RouteWindow()
             {
                 Owner = this
             };
@@ -63,7 +58,7 @@ namespace PassengerCarCompany
 
         private void btnRouteSheetTable_Click(object sender, RoutedEventArgs e)
         {
-            BusStopWindow window = new BusStopWindow()
+            RouteSheetWindow window = new RouteSheetWindow()
             {
                 Owner = this
             };
@@ -72,7 +67,7 @@ namespace PassengerCarCompany
 
         private void btnStopsOnTheRouteTable_Click(object sender, RoutedEventArgs e)
         {
-            BusStopWindow window = new BusStopWindow()
+            StopsOnTheRouteWindow window = new StopsOnTheRouteWindow()
             {
                 Owner = this
             };
