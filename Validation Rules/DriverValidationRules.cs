@@ -40,22 +40,6 @@ namespace PassengerCarCompany.DriverValidationRules
         }
     }
 
-    class SexValidRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            return new ValidationResult(true, null);
-        }
-    }
-
-    class BirthdateValidRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            return new ValidationResult(true, null);
-        }
-    }
-
     class PhoneNumberValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
