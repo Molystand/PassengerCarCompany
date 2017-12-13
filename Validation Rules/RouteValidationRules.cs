@@ -18,6 +18,8 @@ namespace PassengerCarCompany.RouteValidationRules
 
     class TitleValidRule : ValidationRule
     {
+        const int titleMaxLen = 100;
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             return new ValidationResult(true, null);
@@ -26,17 +28,23 @@ namespace PassengerCarCompany.RouteValidationRules
 
     class RouteLengthValidRule : ValidationRule
     {
+        enum RouteLen : int
+        {
+            From = 5,
+            To   = 50
+        }
+
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
             return new ValidationResult(true, null);
         }
     }
 
-    class AverTravelTimeValidRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            return new ValidationResult(true, null);
-        }
-    }
+    //class AverTravelTimeValidRule : ValidationRule
+    //{
+    //    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    //    {
+    //        return new ValidationResult(true, null);
+    //    }
+    //}
 }
