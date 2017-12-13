@@ -160,7 +160,7 @@ namespace PassengerCarCompany
         {
             using (var db = new PassengerCarCompanyEntities())
             {
-                return (from busStop in db.BusStop select busStop).ToArray();
+                return (from bs in db.BusStop select bs).ToArray();
             }
         }
 

@@ -189,7 +189,7 @@ namespace PassengerCarCompany
         {
             using (var db = new PassengerCarCompanyEntities())
             {
-                return (from Route in db.Route select Route).ToArray();
+                return (from r in db.Route select r).ToArray();
             }
         }
 

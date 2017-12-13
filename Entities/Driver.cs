@@ -240,7 +240,7 @@ namespace PassengerCarCompany
         {
             using (var db = new PassengerCarCompanyEntities())
             {
-                return (from Driver in db.Driver select Driver).ToArray();
+                return (from d in db.Driver select d).ToArray();
             }
         }
 
