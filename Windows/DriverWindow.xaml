@@ -127,9 +127,6 @@
                     <DatePicker.SelectedDate>
                         <Binding Path="Birthdate" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
-                            <Binding.ValidationRules>
-                                <valid:BirthdateValidRule/>
-                            </Binding.ValidationRules>
                         </Binding>
                     </DatePicker.SelectedDate>
                     

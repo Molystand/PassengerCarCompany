@@ -98,7 +98,7 @@ namespace PassengerCarCompany
             set
             {
                 plannedProfit = value;
-                plannedProfit("PlannedProfit");
+                OnPropertyChanged("PlannedProfit");
             }
         }
 
