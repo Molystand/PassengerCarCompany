@@ -167,7 +167,7 @@ namespace PassengerCarCompany
             using (var db = new PassengerCarCompanyEntities())
             {
                 // Есть ли такая запись в БД.
-                bool entryFound = db.RouteSheet.Find(this.Id) != null;
+                bool entryFound = RouteSheet.Get(this.Number, this.Date) != null;
 
                 if (!entryFound)
                 {
@@ -225,28 +225,30 @@ namespace PassengerCarCompany
 
         public void Update(RouteSheet newEntry)
         {
-            if (newEntry != null)
+            if (newEntry == null)
+                return;
+            if (RouteSheet.Get(this.Number, this.Date) != null)
+                return;
+
+            using (var db = new PassengerCarCompanyEntities())
             {
-                using (var db = new PassengerCarCompanyEntities())
-                {
-                    db.Database.ExecuteSqlCommand(@"UPDATE RouteSheet
-                                                    SET Id = @id, Number = @number, Date = @date, DepartureTime = @departureTime, ArrivalTime = @arrivalTime,
-                                                        PlannedProfit = @plannedProfit, RealProfit = @realProfit,
-                                                        DriverNumber = @drivernumber, RouteNumber = @routeNumber, BusNumber = @busNumber
-                                                    WHERE Id = @oldId",
-                                                    new SqlParameter("id",            newEntry.Id),
-                                                    new SqlParameter("number",        newEntry.Number),
-                                                    new SqlParameter("date",          newEntry.Date),
-                                                    new SqlParameter("departureTime", newEntry.DepartureTime),
-                                                    new SqlParameter("arrivalTime",   newEntry.ArrivalTime),
-                                                    new SqlParameter("plannedProfit", newEntry.PlannedProfit),
-                                                    new SqlParameter("realProfit",    newEntry.RealProfit),
-                                                    new SqlParameter("drivernumber",  newEntry.DriverNumber),
-                                                    new SqlParameter("routeNumber",   newEntry.RouteNumber),
-                                                    new SqlParameter("busNumber",     newEntry.BusNumber),
-                                                    new SqlParameter("oldId",         this.Id));
-                }
+                db.Database.ExecuteSqlCommand(@"UPDATE RouteSheet
+                                                SET Number = @number, Date = @date, DepartureTime = @departureTime, ArrivalTime = @arrivalTime,
+                                                    PlannedProfit = @plannedProfit, RealProfit = @realProfit,
+                                                    DriverNumber = @drivernumber, RouteNumber = @routeNumber, BusNumber = @busNumber
+                                                WHERE Id = @oldId",
+                                                new SqlParameter("number", newEntry.Number),
+                                                new SqlParameter("date", newEntry.Date),
+                                                new SqlParameter("departureTime", newEntry.DepartureTime),
+                                                new SqlParameter("arrivalTime", newEntry.ArrivalTime),
+                                                new SqlParameter("plannedProfit", newEntry.PlannedProfit),
+                                                new SqlParameter("realProfit", newEntry.RealProfit),
+                                                new SqlParameter("drivernumber", newEntry.DriverNumber),
+                                                new SqlParameter("routeNumber", newEntry.RouteNumber),
+                                                new SqlParameter("busNumber", newEntry.BusNumber),
+                                                new SqlParameter("oldId", this.Id));
             }
+
         }
 
         public static void Update(Bus updEntry, Bus newEntry)
@@ -274,6 +276,17 @@ namespace PassengerCarCompany
             using (var db = new PassengerCarCompanyEntities())
             {
                 return db.RouteSheet.Find(id);
+            }
+        }
+
+        public static RouteSheet Get(int number, DateTime date)
+        {
+            using (var db = new PassengerCarCompanyEntities())
+            {
+                return (from rs in db.RouteSheet
+                        where rs.Number == number
+                             && rs.Date == date
+                        select rs).FirstOrDefault();
             }
         }
 

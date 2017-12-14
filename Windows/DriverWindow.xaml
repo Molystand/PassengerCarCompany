@@ -123,7 +123,7 @@
                     <ComboBoxItem Name="itemWoman" Content="жен"/>
                 </ComboBox>
                 <DatePicker Name="dateBirthDate" Grid.Row="1" Grid.Column="3" Validation.Error="ValidationError"
-                            SelectedDateFormat="Short" Margin="5">
+                            SelectedDateFormat="Short" Margin="5" DisplayDateStart="1/1/1970">
                     <DatePicker.SelectedDate>
                         <Binding Path="Birthdate" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">

@@ -40,11 +40,11 @@ namespace PassengerCarCompany.RouteValidationRules
         }
     }
 
-    //class AverTravelTimeValidRule : ValidationRule
-    //{
-    //    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-    //    {
-    //        return new ValidationResult(true, null);
-    //    }
-    //}
+    class AverTravelTimeValidRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return new ValidationResult(true, null);
+        }
+    }
 }

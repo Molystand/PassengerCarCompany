@@ -60,7 +60,7 @@ namespace PassengerCarCompany.BusValidationRules
             }
             if (year < (int)Year.From || year > (int)Year.To)
             {
-                return new ValidationResult(false, $"Год должен находиться в диапазоне от {Year.From} до {Year.To}.");
+                return new ValidationResult(false, $"Год должен находиться в диапазоне от {(int)Year.From} до {(int)Year.To}.");
             }
 
             return new ValidationResult(true, null);
@@ -83,7 +83,7 @@ namespace PassengerCarCompany.BusValidationRules
             }
             if (capacity < (int)Capacity.From || capacity > (int)Capacity.To)
             {
-                return new ValidationResult(false, $"Вместимость должна быть в диапазоне от {Capacity.From} до {Capacity.To}.");
+                return new ValidationResult(false, $"Вместимость должна быть в диапазоне от {(int)Capacity.From} до {(int)Capacity.To}.");
             }
 
             return new ValidationResult(true, null);

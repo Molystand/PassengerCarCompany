@@ -139,6 +139,9 @@ namespace PassengerCarCompany.Windows
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (tbErrorInfo.Text != string.Empty)
+                return;
+
             int selected = dgridBus.SelectedIndex;
             if (selected != -1)
             {

@@ -19,6 +19,9 @@ namespace PassengerCarCompany.Windows
         {
             InitializeComponent();
 
+            // Максимальная дата рождения для водителя (текущая дата минус 18 полных лет).
+            dateBirthDate.DisplayDateEnd = new DateTime(DateTime.Now.Subtract(new DateTime(19, 1, 1)).Ticks);
+
             // Контекст данных для блока доп. информации.
             selectedDriver = new Driver();
             gboxCurrDriver.DataContext = selectedDriver;

@@ -135,7 +135,7 @@
                         <Binding Path="DepartureTime" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <valid:NumberValidRule/>
+                                <valid:TimeValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -145,7 +145,7 @@
                         <Binding Path="ArrivalTime" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <valid:NumberValidRule/>
+                                <valid:TimeValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

@@ -70,9 +70,6 @@
                 <Label Content="Длина" Margin="5" Grid.Row="2"/>
                 <Label Content="Среднее время поездки" Margin="5" Grid.Row="3"/>
 
-                <!--<TextBox Name="tboxNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError"
-                         Text="{Binding Number, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}">-->
-                <!--</TextBox>-->
                 <TextBox Name="tboxNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
                         <Binding Path="Number" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
@@ -107,6 +104,9 @@
                     <TextBox.Text>
                         <Binding Path="AverTravelTime" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:AverTravelTimeValidRule/>
+                            </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>

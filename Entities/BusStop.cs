@@ -72,7 +72,10 @@ namespace PassengerCarCompany
             using (var db = new PassengerCarCompanyEntities())
             {
                 // Есть ли такая запись в БД.
-                bool entryFound = db.BusStop.Find(this.Id) != null;
+                bool entryFound = (from bs in db.BusStop
+                                   where bs.Title == this.Title
+                                   select bs)
+                                   .FirstOrDefault() != null;
 
                 if (!entryFound)
                 {
@@ -135,9 +138,8 @@ namespace PassengerCarCompany
                 using (var db = new PassengerCarCompanyEntities())
                 {
                     db.Database.ExecuteSqlCommand(@"UPDATE BusStop
-                                                    SET Id = @id, Title = @title
+                                                    SET Title = @title
                                                     WHERE Id = @oldId",
-                                                    new SqlParameter("id", newEntry.Id),
                                                     new SqlParameter("title", newEntry.Title),
                                                     new SqlParameter("oldId", this.Id));
                 }

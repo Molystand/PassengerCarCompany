@@ -69,7 +69,7 @@ namespace PassengerCarCompany.Windows
             if (e.AddedItems.Count <= 0 || dgridBusStop.SelectedItems.Count > 1 || dgridBusStop.Items.IndexOf(e.AddedItems[0]) >= lstBusStop.Count)
                 return;
 
-            selectedBusStop.Id = ((BusStop)e.AddedItems[0]).Id;
+            //selectedBusStop.Id = ((BusStop)e.AddedItems[0]).Id;
             selectedBusStop.Title = ((BusStop)e.AddedItems[0]).Title;
         }
 
@@ -137,6 +137,9 @@ namespace PassengerCarCompany.Windows
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (tbErrorInfo.Text != string.Empty)
+                return;
+
             int selected = dgridBusStop.SelectedIndex;
             if (selected != -1)
             {

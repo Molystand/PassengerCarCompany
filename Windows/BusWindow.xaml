@@ -80,8 +80,16 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Name="tboxMark" Grid.Row="1" Grid.Column="1"
-                         Text="{Binding Path=Mark, Mode=TwoWay, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Name="tboxMark" Grid.Row="1" Grid.Column="1" Validation.Error="ValidationError">
+                    <TextBox.Text>
+                        <Binding Path="Mark" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <valid:MarkValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBox Name="tboxYear" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
                         <Binding Path="ReleaseYear" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"

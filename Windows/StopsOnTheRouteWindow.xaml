@@ -22,7 +22,7 @@
         <DataGrid Name="dgridStopsOnTheRoute" AutoGenerateColumns="False" Grid.RowSpan="3"
                   Loaded="UpdateData" SelectionChanged="dgridStopsOnTheRoute_SelectionChanged">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="Номер остановки" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="RouteNumber" Binding="{Binding RouteNumber}"/>
                 <DataGridTextColumn Header="RouteTitle" Binding="{Binding RouteTitle}" Width="*"/>
                 <DataGridTextColumn Header="StopId" Binding="{Binding StopId}"/>
@@ -65,7 +65,7 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Название" Margin="5"/>
+                <Label Content="Номер остановки" Margin="5"/>
                 <Label Content="RouteNumber" Margin="5" Grid.Row="1"/>
                 <Label Content="StopId" Margin="5" Grid.Row="2"/>
 

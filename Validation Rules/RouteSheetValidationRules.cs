@@ -35,4 +35,12 @@ namespace PassengerCarCompany.RouteSheetValidationRules
             return new ValidationResult(true, null);
         }
     }
+
+    class TimeValidRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            return new ValidationResult(true, null);
+        }
+    }
 }
