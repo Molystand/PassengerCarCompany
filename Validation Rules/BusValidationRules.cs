@@ -33,11 +33,11 @@ namespace PassengerCarCompany.BusValidationRules
             string mark = value.ToString();
             if (mark == string.Empty)
             {
-                return new ValidationResult(false, "Марка должна содержать символы");
+                return new ValidationResult(false, "Марка не должна быть пустой");
             }
             if (mark.Length > markMaxLen)
             {
-                return new ValidationResult(false, $"Количество символов в названии не должно быть больше {markMaxLen}");
+                return new ValidationResult(false, $"Марка должна состоять не более чем из {markMaxLen} символов");
             }
 
             return new ValidationResult(true, null);
@@ -54,13 +54,10 @@ namespace PassengerCarCompany.BusValidationRules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int year))
+            if (!int.TryParse(value.ToString(), out int year)
+                || year < (int)Year.From || year > (int)Year.To)
             {
-                return new ValidationResult(false, "В поле \"год\" обнаружены недопустимые символы.");
-            }
-            if (year < (int)Year.From || year > (int)Year.To)
-            {
-                return new ValidationResult(false, $"Год должен находиться в диапазоне от {(int)Year.From} до {(int)Year.To}.");
+                return new ValidationResult(false, $"Год должен быть целым числом от {(int)Year.From} до {(int)Year.To}.");
             }
 
             return new ValidationResult(true, null);
@@ -77,13 +74,10 @@ namespace PassengerCarCompany.BusValidationRules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int capacity))
+            if (!int.TryParse(value.ToString(), out int capacity)
+                || capacity < (int)Capacity.From || capacity > (int)Capacity.To)
             {
-                return new ValidationResult(false, "В поле \"вместимость\" обнаружены недопустимые символы.");
-            }
-            if (capacity < (int)Capacity.From || capacity > (int)Capacity.To)
-            {
-                return new ValidationResult(false, $"Вместимость должна быть в диапазоне от {(int)Capacity.From} до {(int)Capacity.To}.");
+                return new ValidationResult(false, $"Вместимость должна быть целым числом от {(int)Capacity.From} до {(int)Capacity.To}.");
             }
 
             return new ValidationResult(true, null);
