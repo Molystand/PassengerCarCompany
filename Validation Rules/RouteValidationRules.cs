@@ -67,7 +67,7 @@ namespace PassengerCarCompany.RouteValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!Regex.IsMatch(value.ToString(), @"^(([0-1]\d)|(2[0-4]))(:[0-5]\d){2}$"))
+            if (!Regex.IsMatch(value.ToString(), @"^(([01]\d)|(2[0-4]))(:[0-5]\d){2}$"))
             {
                 return new ValidationResult(false, "Время должно быть в формате чч:мм:сс");
             }

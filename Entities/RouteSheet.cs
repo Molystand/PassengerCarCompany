@@ -169,7 +169,11 @@ namespace PassengerCarCompany
                 // Есть ли такая запись в БД.
                 bool entryFound = RouteSheet.Get(this.Number, this.Date) != null;
 
-                if (!entryFound)
+                //bool numbersFound = Driver.Get(this.DriverNumber) != null
+                //                 && Route.Get(this.RouteNumber)   != null
+                //                 && Bus.Get(this.BusNumber)       != null;
+
+                if (!entryFound /*&& numbersFound*/)
                 {
                     db.RouteSheet.Add(this);
                     db.SaveChanges();
@@ -227,8 +231,8 @@ namespace PassengerCarCompany
         {
             if (newEntry == null)
                 return;
-            if (RouteSheet.Get(this.Number, this.Date) != null)
-                return;
+            //if (RouteSheet.Get(this.Number, this.Date) != null)
+            //    return;
 
             using (var db = new PassengerCarCompanyEntities())
             {

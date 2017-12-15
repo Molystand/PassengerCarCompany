@@ -140,14 +140,46 @@ namespace PassengerCarCompany.Windows
                 return;
             }
 
+            if (Driver.Get(selectedRouteSheet.DriverNumber) == null)
+            {
+                MessageBox.Show("Водителя с таким номером не существует в БД", "Ошибка");
+                return;
+            }
+            if (Route.Get(selectedRouteSheet.RouteNumber) == null)
+            {
+                MessageBox.Show("Маршрута с таким номером не существует в БД", "Ошибка");
+                return;
+            }
+            if (Bus.Get(selectedRouteSheet.BusNumber) == null)
+            {
+                MessageBox.Show("Автобуса с таким номером не существует в БД", "Ошибка");
+                return;
+            }
+
             lstRouteSheets.Add((RouteSheet)selectedRouteSheet.Clone());
         }
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (RouteSheet.Get(selectedRouteSheet.Number, selectedRouteSheet.Date) != null)
+            //if (RouteSheet.Get(selectedRouteSheet.Number, selectedRouteSheet.Date) != null)
+            //{
+            //    MessageBox.Show("Маршрутный лист с таким номером и датой уже есть в БД", "Ошибка");
+            //    return;
+            //}
+
+            if (Driver.Get(selectedRouteSheet.DriverNumber) == null)
             {
-                MessageBox.Show("Маршрутный лист с таким номером и датой уже есть в БД", "Ошибка");
+                MessageBox.Show("Водителя с таким номером не существует в БД", "Ошибка");
+                return;
+            }
+            if (Route.Get(selectedRouteSheet.RouteNumber) == null)
+            {
+                MessageBox.Show("Маршрута с таким номером не существует в БД", "Ошибка");
+                return;
+            }
+            if (Bus.Get(selectedRouteSheet.BusNumber) == null)
+            {
+                MessageBox.Show("Автобуса с таким номером не существует в БД", "Ошибка");
                 return;
             }
 

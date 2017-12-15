@@ -125,7 +125,7 @@
                         <Binding Path="BusNumber" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <rValid:NumberValidRule/>
+                                <bValid:NumberValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -155,7 +155,7 @@
                         <Binding Path="PlannedProfit" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <valid:NumberValidRule/>
+                                <valid:PlannedProfitValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -165,7 +165,7 @@
                         <Binding Path="RealProfit" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <valid:NumberValidRule/>
+                                <valid:RealProfitValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>

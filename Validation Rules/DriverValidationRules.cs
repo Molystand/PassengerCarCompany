@@ -16,7 +16,7 @@ namespace PassengerCarCompany.DriverValidationRules
             if (!int.TryParse(value.ToString(), out int number)
                 || number <= 0)
             {
-                return new ValidationResult(false, "Номер должен быть целым числом больше нуля");
+                return new ValidationResult(false, "Номер водителя должен быть целым числом больше нуля");
             }
 
             return new ValidationResult(true, null);
