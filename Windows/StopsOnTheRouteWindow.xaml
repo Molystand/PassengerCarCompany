@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
         xmlns:valid="clr-namespace:PassengerCarCompany.StopsOnTheRouteValidationRules"
+        xmlns:sValid="clr-namespace:PassengerCarCompany.BusStopValidationRules"
         mc:Ignorable="d"
         Title="StopsOnTheRouteWindow" Height="400" Width="840">
     <Grid>
@@ -15,7 +16,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="350"/>
         </Grid.ColumnDefinitions>
 
         <!--Основная информация-->
@@ -24,7 +25,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер остановки" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="RouteNumber" Binding="{Binding RouteNumber}"/>
-                <DataGridTextColumn Header="RouteTitle" Binding="{Binding RouteTitle}" Width="*"/>
+                <!--<DataGridTextColumn Header="RouteTitle" Binding="{Binding RouteTitle}" Width="*"/>-->
                 <DataGridTextColumn Header="StopId" Binding="{Binding StopId}"/>
                 <DataGridTextColumn Header="StopTitle" Binding="{Binding StopTitle}" Width="*"/>
             </DataGrid.Columns>
@@ -53,7 +54,7 @@
 
         <!--Дополнительная информация-->
         <GroupBox Header="Текущая запись" HorizontalAlignment="Center"  Margin="10" Grid.Row="0" Grid.Column="1"
-                  Name="gboxCurrStopsOnTheRoute" VerticalAlignment="Top" MinWidth="200">
+                  Name="gboxCurrStopsOnTheRoute" VerticalAlignment="Top" MinWidth="280">
             <Grid Name="gridInfo">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -65,9 +66,10 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Label Content="Номер остановки" Margin="5"/>
-                <Label Content="RouteNumber" Margin="5" Grid.Row="1"/>
-                <Label Content="StopId" Margin="5" Grid.Row="2"/>
+                <Label Content="Порядковый номер" Margin="5"/>
+                <Label Content="Номер маршрута" Margin="5" Grid.Row="1"/>
+                <Label Content="Id остановки" Margin="5" Grid.Row="2"/>
+                <!--<Label Content="Название остановки" Margin="5" Grid.Row="2"/>-->
 
                 <TextBox Name="tbNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
@@ -99,6 +101,17 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
+
+                <!--<TextBox Name="tbStopTitle" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError" TextWrapping="NoWrap">
+                    <TextBox.Text>
+                        <Binding Path="StopTitle" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
+                                 UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <sValid:TitleValidRule/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>-->
             </Grid>
         </GroupBox>
 

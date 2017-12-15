@@ -50,6 +50,7 @@ namespace PassengerCarCompany
                 using (var db = new PassengerCarCompanyEntities())
                 {
                     RouteTitle = db.Route.Find(routeNumber).Title;
+                    OnPropertyChanged("RouteTitle");
                 }
                 OnPropertyChanged("RouteNumber");
             }
@@ -64,6 +65,7 @@ namespace PassengerCarCompany
                 using (var db = new PassengerCarCompanyEntities())
                 {
                     StopTitle = db.BusStop.Find(stopId).Title;
+                    OnPropertyChanged("StopTitle");
                 }
                 OnPropertyChanged("StopId");
             }
@@ -187,7 +189,9 @@ namespace PassengerCarCompany
         {
             using (var db = new PassengerCarCompanyEntities())
             {
-                return (from stop in db.StopsOnTheRoute select stop).ToArray();
+                return (from stop in db.StopsOnTheRoute
+                        orderby stop.RouteNumber, stop.Number
+                        select stop).ToArray();
             }
         }
 
