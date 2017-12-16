@@ -7,6 +7,7 @@ namespace PassengerCarCompany
     using System.Configuration;
     using System.Data.SqlClient;
     using System.Linq;
+    using System.Windows;
 
     public partial class StopsOnTheRoute : INotifyPropertyChanged, ICloneable
     {
@@ -62,19 +63,31 @@ namespace PassengerCarCompany
             set
             {
                 stopId = value;
-                using (var db = new PassengerCarCompanyEntities())
-                {
-                    StopTitle = db.BusStop.Find(stopId).Title;
-                    OnPropertyChanged("StopTitle");
-                }
+
+                stopTitle = BusStop.Get(stopId).Title;
+                OnPropertyChanged("StopTitle");
+
                 OnPropertyChanged("StopId");
             }
         }
 
+        string stopTitle;
 
         public string RouteTitle { get; set; }
 
-        public string StopTitle { get; set; }
+        public string StopTitle
+        {
+            get { return stopTitle; }
+            set
+            {
+                stopTitle = value;
+
+                stopId = BusStop.Get(stopTitle).Id;
+                OnPropertyChanged("StopId");
+
+                OnPropertyChanged("StopTitle");
+            }
+        }
 
 
 
@@ -161,13 +174,22 @@ namespace PassengerCarCompany
             {
                 using (var db = new PassengerCarCompanyEntities())
                 {
-                    db.Database.ExecuteSqlCommand(@"UPDATE StopsOnTheRoute
+                    try
+                    {
+                        db.Database.ExecuteSqlCommand(@"UPDATE StopsOnTheRoute
                                                     SET Number = @number, RouteNumber = @routeNumber, StopId = @stopId
-                                                    WHERE Number = @oldNumber",
-                                                    new SqlParameter("number",      newEntry.Number),
+                                                    WHERE Number = @oldNumber AND RouteNumber = @oldRouteNumber",
+                                                    new SqlParameter("number", newEntry.Number),
                                                     new SqlParameter("routeNumber", newEntry.RouteNumber),
-                                                    new SqlParameter("stopId",      newEntry.StopId),
-                                                    new SqlParameter("oldNumber",   this.Number));
+                                                    new SqlParameter("stopId", newEntry.StopId),
+                                                    new SqlParameter("oldNumber", this.Number),
+                                                    new SqlParameter("oldRouteNumber", this.RouteNumber));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Не удалось обновить запись");
+                        throw;
+                    }
                 }
             }
 

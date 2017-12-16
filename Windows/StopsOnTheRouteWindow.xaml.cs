@@ -69,9 +69,9 @@ namespace PassengerCarCompany.Windows
             if (e.AddedItems.Count <= 0 || dgridStopsOnTheRoute.SelectedItems.Count > 1 || dgridStopsOnTheRoute.Items.IndexOf(e.AddedItems[0]) >= lstStopsOnTheRoute.Count)
                 return;
 
-            selectedStopsOnTheRoute.Number = ((StopsOnTheRoute)e.AddedItems[0]).Number;
+            selectedStopsOnTheRoute.Number      = ((StopsOnTheRoute)e.AddedItems[0]).Number;
             selectedStopsOnTheRoute.RouteNumber = ((StopsOnTheRoute)e.AddedItems[0]).RouteNumber;
-            selectedStopsOnTheRoute.StopId = ((StopsOnTheRoute)e.AddedItems[0]).StopId;
+            selectedStopsOnTheRoute.StopId      = ((StopsOnTheRoute)e.AddedItems[0]).StopId;
         }
 
         private void ValidationError(object sender, ValidationErrorEventArgs e)
@@ -138,16 +138,23 @@ namespace PassengerCarCompany.Windows
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            if (StopsOnTheRoute.Get(selectedStopsOnTheRoute.Number, selectedStopsOnTheRoute.RouteNumber) != null)
+            if (StopsOnTheRoute.Get(selectedStopsOnTheRoute.Number, selectedStopsOnTheRoute.RouteNumber)?.StopId == selectedStopsOnTheRoute.StopId)
             {
-                MessageBox.Show("Такая остановка уже есть в БД", "Ошибка");
+                //MessageBox.Show("Такая остановка уже есть в БД", "Ошибка");
                 return;
             }
 
             int selected = dgridStopsOnTheRoute.SelectedIndex;
             if (selected != -1)
             {
-                lstStopsOnTheRoute[selected] = (StopsOnTheRoute)selectedStopsOnTheRoute.Clone();
+                try
+                {
+                    lstStopsOnTheRoute[selected] = (StopsOnTheRoute)selectedStopsOnTheRoute.Clone();
+                }
+                catch (Exception ex)
+                {
+                    UpdateData(sender, e);
+                }
             }
         }
 

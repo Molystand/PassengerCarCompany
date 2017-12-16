@@ -12,22 +12,56 @@ namespace PassengerCarCompany.StopsOnTheRouteValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
+            if (!int.TryParse(value.ToString(), out int number)
+                || number <= 0)
+            {
+                return new ValidationResult(false, "Порядковый номер должен быть целым числом больше нуля");
+            }
+
             return new ValidationResult(true, null);
         }
     }
-
-    class RouteNumberValidRule : ValidationRule
-    {
-        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
-        {
-            return new ValidationResult(true, null);
-        }
-    }
-
+    
     class StopIdValidRule : ValidationRule
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
+            if (!int.TryParse(value.ToString(), out int id)
+                || id <= 0)
+            {
+                return new ValidationResult(false, "Id остановки должно быть целым числом больше нуля");
+            }
+
+            if (BusStop.Get(id) == null)
+            {
+                return new ValidationResult(false, "Остановки с таким Id нет в БД");
+            }
+
+            return new ValidationResult(true, null);
+        }
+    }
+
+    class StopTitleValidRule : ValidationRule
+    {
+        const int titleMaxLen = 100;
+
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
+            string title = value.ToString();
+            if (title == string.Empty)
+            {
+                return new ValidationResult(false, "Название остановки не должно быть пустым");
+            }
+            if (title.Length > titleMaxLen)
+            {
+                return new ValidationResult(false, $"Количество символов в названии остановки не должно быть больше {titleMaxLen}");
+            }
+
+            if (BusStop.Get(title) == null)
+            {
+                return new ValidationResult(false, "Остановки с таким названием нет в БД");
+            }
+
             return new ValidationResult(true, null);
         }
     }

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
         xmlns:valid="clr-namespace:PassengerCarCompany.StopsOnTheRouteValidationRules"
+        xmlns:rValid="clr-namespace:PassengerCarCompany.RouteValidationRules"
         xmlns:sValid="clr-namespace:PassengerCarCompany.BusStopValidationRules"
         mc:Ignorable="d"
         Title="StopsOnTheRouteWindow" Height="400" Width="840">
@@ -68,8 +69,8 @@
 
                 <Label Content="Порядковый номер" Margin="5"/>
                 <Label Content="Номер маршрута" Margin="5" Grid.Row="1"/>
-                <Label Content="Id остановки" Margin="5" Grid.Row="2"/>
-                <!--<Label Content="Название остановки" Margin="5" Grid.Row="2"/>-->
+                <!--<Label Content="Id остановки" Margin="5" Grid.Row="2"/>-->
+                <Label Content="Название остановки" Margin="5" Grid.Row="2"/>
 
                 <TextBox Name="tbNumber" Grid.Row="0" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
@@ -86,12 +87,12 @@
                         <Binding Path="RouteNumber" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <valid:RouteNumberValidRule/>
+                                <rValid:NumberValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
-                <TextBox Name="tbStopId" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError">
+                <!--<TextBox Name="tbStopId" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError">
                     <TextBox.Text>
                         <Binding Path="StopId" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
@@ -100,18 +101,18 @@
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
-                </TextBox>
+                </TextBox>-->
 
-                <!--<TextBox Name="tbStopTitle" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError" TextWrapping="NoWrap">
+                <TextBox Name="tbStopTitle" Grid.Row="2" Grid.Column="1" Validation.Error="ValidationError" TextWrapping="NoWrap">
                     <TextBox.Text>
                         <Binding Path="StopTitle" Mode="TwoWay" ValidatesOnDataErrors="True" ValidatesOnExceptions="True"
                                  UpdateSourceTrigger="LostFocus" NotifyOnValidationError="True">
                             <Binding.ValidationRules>
-                                <sValid:TitleValidRule/>
+                                <valid:StopTitleValidRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
-                </TextBox>-->
+                </TextBox>
             </Grid>
         </GroupBox>
 

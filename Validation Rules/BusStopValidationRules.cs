@@ -18,11 +18,11 @@ namespace PassengerCarCompany.BusStopValidationRules
             string title = value.ToString();
             if (title == string.Empty)
             {
-                return new ValidationResult(false, "Название не должно быть пустым");
+                return new ValidationResult(false, "Название остановки не должно быть пустым");
             }
             if (title.Length > titleMaxLen)
             {
-                return new ValidationResult(false, $"Количество символов в названии не должно быть больше {titleMaxLen}");
+                return new ValidationResult(false, $"Количество символов в названии остановки не должно быть больше {titleMaxLen}");
             }
 
             return new ValidationResult(true, null);
