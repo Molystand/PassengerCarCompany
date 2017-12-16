@@ -137,13 +137,26 @@ namespace PassengerCarCompany.Windows
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            if (BusStop.Get(selectedBusStop.Title) != null)
+            {
+                MessageBox.Show("Остановка с таким названием уже есть в БД", "Ошибка");
+                return;
+            }
+
             if (tbErrorInfo.Text != string.Empty)
                 return;
 
             int selected = dgridBusStop.SelectedIndex;
             if (selected != -1)
             {
-                lstBusStop[selected] = (BusStop)selectedBusStop.Clone();
+                try
+                {
+                    lstBusStop[selected] = (BusStop)selectedBusStop.Clone();
+                }
+                catch (Exception ex)
+                {
+                    UpdateData(sender, e);
+                }
             }
         }
 

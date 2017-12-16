@@ -26,10 +26,10 @@
                   Loaded="UpdateData" SelectionChanged="dgridRouteSheet_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
-                <DataGridTextColumn Header="Дата" Binding="{Binding Date}" Width="*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
                 <DataGridTextColumn Header="№ водителя" Binding="{Binding DriverNumber}"/>
                 <DataGridTextColumn Header="№ маршрута" Binding="{Binding RouteNumber}"/>
-                <DataGridTextColumn Header="№ автобуса" Binding="{Binding BusNumber}"/>
+                <DataGridTextColumn Header="№ автобуса" Binding="{Binding BusNumber}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 

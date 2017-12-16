@@ -145,7 +145,14 @@ namespace PassengerCarCompany.Windows
             int selected = dgridBus.SelectedIndex;
             if (selected != -1)
             {
-                lstBuses[selected] = (Bus)selectedBus.Clone();
+                try
+                {
+                    lstBuses[selected] = (Bus)selectedBus.Clone();
+                }
+                catch (Exception ex)
+                {
+                    UpdateData(sender, e);
+                }
             }
         }
 

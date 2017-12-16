@@ -156,7 +156,14 @@ namespace PassengerCarCompany.Windows
             int selected = dgridDriver.SelectedIndex;
             if (selected != -1)
             {
-                lstDrivers[selected] = (Driver)selectedDriver.Clone();
+                try
+                {
+                    lstDrivers[selected] = (Driver)selectedDriver.Clone();
+                }
+                catch (Exception ex)
+                {
+                    UpdateData(sender, e);
+                }
             }
         }
 

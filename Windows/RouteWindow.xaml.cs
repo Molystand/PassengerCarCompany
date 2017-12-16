@@ -147,7 +147,14 @@ namespace PassengerCarCompany.Windows
             int selected = dgridRoute.SelectedIndex;
             if (selected != -1)
             {
-                lstRoutes[selected] = (Route)selectedRoute.Clone();
+                try
+                {
+                    lstRoutes[selected] = (Route)selectedRoute.Clone();
+                }
+                catch (Exception ex)
+                {
+                    UpdateData(sender, e);
+                }
             }
         }
 

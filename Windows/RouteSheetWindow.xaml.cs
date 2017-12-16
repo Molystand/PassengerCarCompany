@@ -186,7 +186,14 @@ namespace PassengerCarCompany.Windows
             int selected = dgridRouteSheet.SelectedIndex;
             if (selected != -1)
             {
-                lstRouteSheets[selected] = (RouteSheet)selectedRouteSheet.Clone();
+                try
+                {
+                    lstRouteSheets[selected] = (RouteSheet)selectedRouteSheet.Clone();
+                }
+                catch (Exception ex)
+                {
+                    UpdateData(sender, e);
+                }
             }
         }
 
