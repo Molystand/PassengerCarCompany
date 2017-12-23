@@ -69,7 +69,7 @@ namespace PassengerCarCompany.Windows
             if (e.AddedItems.Count <= 0 || dgridRouteSheet.SelectedItems.Count > 1 || dgridRouteSheet.Items.IndexOf(e.AddedItems[0]) >= lstRouteSheets.Count)
                 return;
 
-            //selectedRouteSheet.Id            = ((RouteSheet)e.AddedItems[0]).Id;
+            selectedRouteSheet.Id            = ((RouteSheet)e.AddedItems[0]).Id;
             selectedRouteSheet.Number        = ((RouteSheet)e.AddedItems[0]).Number;
             selectedRouteSheet.Date          = ((RouteSheet)e.AddedItems[0]).Date;
             selectedRouteSheet.DepartureTime = ((RouteSheet)e.AddedItems[0]).DepartureTime;
@@ -161,11 +161,11 @@ namespace PassengerCarCompany.Windows
 
         private void btnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            //if (RouteSheet.Get(selectedRouteSheet.Number, selectedRouteSheet.Date) != null)
-            //{
-            //    MessageBox.Show("Маршрутный лист с таким номером и датой уже есть в БД", "Ошибка");
-            //    return;
-            //}
+            if (RouteSheet.Get(selectedRouteSheet.Number, selectedRouteSheet.Date).Id != selectedRouteSheet.Id)
+            {
+                MessageBox.Show("Маршрутный лист с таким номером и датой уже есть в БД", "Ошибка");
+                return;
+            }
 
             if (Driver.Get(selectedRouteSheet.DriverNumber) == null)
             {

@@ -26,6 +26,7 @@
                   Loaded="UpdateData" SelectionChanged="dgridRouteSheet_SelectionChanged"
                   CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
                 <DataGridTextColumn Header="№ водителя" Binding="{Binding DriverNumber}"/>
