@@ -20,7 +20,8 @@
 
         <!--Основная информация-->
         <DataGrid Name="dgridBus" AutoGenerateColumns="False" Grid.RowSpan="3"
-                  Loaded="UpdateData" SelectionChanged="dgridBus_SelectionChanged">
+                  Loaded="UpdateData" SelectionChanged="dgridBus_SelectionChanged"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Год выпуска" Binding="{Binding ReleaseYear}"/>

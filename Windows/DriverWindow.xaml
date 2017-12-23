@@ -20,7 +20,8 @@
 
         <!--Основная информация-->
         <DataGrid Name="dgridDriver" AutoGenerateColumns="False" Grid.RowSpan="3"
-                  Loaded="UpdateData" SelectionChanged="dgridDriver_SelectionChanged">
+                  Loaded="UpdateData" SelectionChanged="dgridDriver_SelectionChanged"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Пол" Binding="{Binding Sex}"/>

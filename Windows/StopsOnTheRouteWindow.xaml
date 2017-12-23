@@ -22,7 +22,8 @@
 
         <!--Основная информация-->
         <DataGrid Name="dgridStopsOnTheRoute" AutoGenerateColumns="False" Grid.RowSpan="3"
-                  Loaded="UpdateData" SelectionChanged="dgridStopsOnTheRoute_SelectionChanged">
+                  Loaded="UpdateData" SelectionChanged="dgridStopsOnTheRoute_SelectionChanged"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер остановки" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="RouteNumber" Binding="{Binding RouteNumber}"/>

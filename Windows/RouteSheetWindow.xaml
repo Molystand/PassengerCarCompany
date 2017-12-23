@@ -23,7 +23,8 @@
 
         <!--Основная информация-->
         <DataGrid Name="dgridRouteSheet" AutoGenerateColumns="False" Grid.RowSpan="3"
-                  Loaded="UpdateData" SelectionChanged="dgridRouteSheet_SelectionChanged">
+                  Loaded="UpdateData" SelectionChanged="dgridRouteSheet_SelectionChanged"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>

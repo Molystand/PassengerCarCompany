@@ -20,7 +20,8 @@
 
         <!--Основная информация-->
         <DataGrid Name="dgridBusStop" AutoGenerateColumns="False" Grid.RowSpan="3"
-                  Loaded="UpdateData" SelectionChanged="dgridBusStop_SelectionChanged">
+                  Loaded="UpdateData" SelectionChanged="dgridBusStop_SelectionChanged"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Название" Binding="{Binding Title}" Width="*"/>
             </DataGrid.Columns>
