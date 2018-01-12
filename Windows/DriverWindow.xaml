@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PassengerCarCompany.Windows"
         xmlns:valid="clr-namespace:PassengerCarCompany.DriverValidationRules"
         mc:Ignorable="d"
-        Title="DriverWindow" Height="450" Width="840">
+        Title="Водители" Height="450" Width="840">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="200"/>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="300">
+        Title="Пассажирская автокомпания" Height="400" Width="350">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
@@ -21,16 +21,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <Button Name="btnBusTable" Content="Таблица Bus" Click="btnBusTable_Click"/>
-        <Button Name="btnBusStopTable" Content="Таблица BusStop" Click="btnBusStopTable_Click"
+        <Button Name="btnBusTable" Content="Автобусы" Click="btnBusTable_Click"/>
+        <Button Name="btnBusStopTable" Content="Автобусные остановки" Click="btnBusStopTable_Click"
                 Grid.Row="1"/>
-        <Button Name="btnDriverTable" Content="Таблица Driver" Click="btnDriverTable_Click"
+        <Button Name="btnDriverTable" Content="Водители" Click="btnDriverTable_Click"
                 Grid.Row="2"/>
-        <Button Name="btnRouteTable" Content="Таблица Route" Click="btnRouteTable_Click"
+        <Button Name="btnRouteTable" Content="Маршруты" Click="btnRouteTable_Click"
                 Grid.Row="3"/>
-        <Button Name="btnRouteSheetTable" Content="Таблица RouteSheet" Click="btnRouteSheetTable_Click"
+        <Button Name="btnRouteSheetTable" Content="Маршрутные листы" Click="btnRouteSheetTable_Click"
                 Grid.Row="4"/>
-        <Button Name="btnStopsOnTheRouteTable" Content="Таблица StopsOnTheRoute" Click="btnStopsOnTheRouteTable_Click"
+        <Button Name="btnStopsOnTheRouteTable" Content="Остановки маршрутов" Click="btnStopsOnTheRouteTable_Click"
                 Grid.Row="5"/>
     </Grid>
 </Window>

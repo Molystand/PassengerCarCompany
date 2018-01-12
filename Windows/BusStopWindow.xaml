@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PassengerCarCompany"
         xmlns:valid="clr-namespace:PassengerCarCompany.BusStopValidationRules"
         mc:Ignorable="d"
-        Title="BusStopWindow" Height="400" Width="640">
+        Title="Автобусные остановки" Height="400" Width="640">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90"/>

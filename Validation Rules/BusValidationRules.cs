@@ -54,7 +54,8 @@ namespace PassengerCarCompany.BusValidationRules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int year)
+            int year;
+            if (!int.TryParse(value.ToString(), out year)
                 || year < (int)Year.From || year > (int)Year.To)
             {
                 return new ValidationResult(false, $"Год должен быть целым числом от {(int)Year.From} до {(int)Year.To}.");
@@ -74,7 +75,8 @@ namespace PassengerCarCompany.BusValidationRules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int capacity)
+            int capacity;
+            if (!int.TryParse(value.ToString(), out capacity)
                 || capacity < (int)Capacity.From || capacity > (int)Capacity.To)
             {
                 return new ValidationResult(false, $"Вместимость должна быть целым числом от {(int)Capacity.From} до {(int)Capacity.To}.");

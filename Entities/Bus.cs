@@ -154,8 +154,6 @@ namespace PassengerCarCompany
 
         public void Update(Bus newEntry)
         {
-            // Возможная валидация.
-
             if (newEntry != null)
             {
                 using (var db = new PassengerCarCompanyEntities())

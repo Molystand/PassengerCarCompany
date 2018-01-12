@@ -13,7 +13,8 @@ namespace PassengerCarCompany.RouteValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int number)
+            int number;
+            if (!int.TryParse(value.ToString(), out number)
                 || number <= 0)
             {
                 return new ValidationResult(false, "Номер маршрута должен быть целым числом больше нуля");
@@ -53,7 +54,8 @@ namespace PassengerCarCompany.RouteValidationRules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int len)
+            int len;
+            if (!int.TryParse(value.ToString(), out len)
                 || len < (int)RouteLen.From || len > (int)RouteLen.To)
             {
                 return new ValidationResult(false, $"Длина маршрута должна быть целым числом от {(int)RouteLen.From} до {(int)RouteLen.To}");

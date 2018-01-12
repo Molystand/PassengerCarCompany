@@ -13,7 +13,8 @@ namespace PassengerCarCompany.RouteSheetValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int number)
+            int number;
+            if (!int.TryParse(value.ToString(), out number)
                 || number <= 0)
             {
                 return new ValidationResult(false, "Номер маршрутного листа должен быть целым числом больше нуля");
@@ -35,7 +36,8 @@ namespace PassengerCarCompany.RouteSheetValidationRules
                 return new ValidationResult(true, null);
             }
 
-            if (!int.TryParse(planProf, out int profit)
+            int profit;
+            if (!int.TryParse(planProf, out profit)
                 || profit < minProfit)
             {
                 return new ValidationResult(false, $"Прибыл должна быть целым числом не меньше {minProfit}");
@@ -51,7 +53,8 @@ namespace PassengerCarCompany.RouteSheetValidationRules
 
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int profit)
+            int profit;
+            if (!int.TryParse(value.ToString(), out profit)
                 || profit < minProfit)
             {
                 return new ValidationResult(false, $"Прибыль должна быть целым числом не меньше {minProfit}");

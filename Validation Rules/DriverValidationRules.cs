@@ -13,7 +13,8 @@ namespace PassengerCarCompany.DriverValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int number)
+            int number;
+            if (!int.TryParse(value.ToString(), out number)
                 || number <= 0)
             {
                 return new ValidationResult(false, "Номер водителя должен быть целым числом больше нуля");

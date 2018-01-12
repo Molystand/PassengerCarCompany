@@ -12,7 +12,8 @@ namespace PassengerCarCompany.StopsOnTheRouteValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int number)
+            int number;
+            if (!int.TryParse(value.ToString(), out number)
                 || number <= 0)
             {
                 return new ValidationResult(false, "Порядковый номер должен быть целым числом больше нуля");
@@ -26,7 +27,8 @@ namespace PassengerCarCompany.StopsOnTheRouteValidationRules
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (!int.TryParse(value.ToString(), out int id)
+            int id;
+            if (!int.TryParse(value.ToString(), out id)
                 || id <= 0)
             {
                 return new ValidationResult(false, "Id остановки должно быть целым числом больше нуля");

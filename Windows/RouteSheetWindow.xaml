@@ -9,7 +9,7 @@
         xmlns:rValid="clr-namespace:PassengerCarCompany.RouteValidationRules"
         xmlns:bValid="clr-namespace:PassengerCarCompany.BusValidationRules"
         mc:Ignorable="d"
-        Title="RouteSheetWindow" Height="450" Width="1000">
+        Title="Маршрутные листы" Height="450" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="230"/>
@@ -26,7 +26,7 @@
                   Loaded="UpdateData" SelectionChanged="dgridRouteSheet_SelectionChanged"
                   CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}"/>
+                <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}"/>-->
                 <DataGridTextColumn Header="Номер" Binding="{Binding Number}"/>
                 <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat='dd.MM.yyyy'}"/>
                 <DataGridTextColumn Header="№ водителя" Binding="{Binding DriverNumber}"/>

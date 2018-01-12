@@ -8,7 +8,7 @@
         xmlns:rValid="clr-namespace:PassengerCarCompany.RouteValidationRules"
         xmlns:sValid="clr-namespace:PassengerCarCompany.BusStopValidationRules"
         mc:Ignorable="d"
-        Title="StopsOnTheRouteWindow" Height="400" Width="840">
+        Title="Остановки маршрутов" Height="400" Width="840">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
@@ -25,11 +25,11 @@
                   Loaded="UpdateData" SelectionChanged="dgridStopsOnTheRoute_SelectionChanged"
                   CanUserAddRows="False" CanUserDeleteRows="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Номер остановки" Binding="{Binding Number}"/>
-                <DataGridTextColumn Header="RouteNumber" Binding="{Binding RouteNumber}"/>
-                <!--<DataGridTextColumn Header="RouteTitle" Binding="{Binding RouteTitle}" Width="*"/>-->
-                <DataGridTextColumn Header="StopId" Binding="{Binding StopId}"/>
-                <DataGridTextColumn Header="StopTitle" Binding="{Binding StopTitle}" Width="*"/>
+                <DataGridTextColumn Header="№ остановки" Binding="{Binding Number}"/>
+                <DataGridTextColumn Header="№ маршрута" Binding="{Binding RouteNumber}"/>
+                <!--<DataGridTextColumn Header="Название маршрута" Binding="{Binding RouteTitle}" Width="*"/>-->
+                <!--<DataGridTextColumn Header="StopId" Binding="{Binding StopId}"/>-->
+                <DataGridTextColumn Header="Название остановки" Binding="{Binding StopTitle}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
 
