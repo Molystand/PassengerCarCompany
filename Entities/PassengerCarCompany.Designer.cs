@@ -1,4 +1,4 @@
-﻿// Создание кода T4 для модели "E:\Admin\Projects\Visual Studio\С#\TestEF\PassengerCarCompany.edmx" включено. 
+﻿// Создание кода T4 для модели "F:\Projects\Visual Studio\С#\PassengerCarCompany\Entities\PassengerCarCompany.edmx" включено. 
 // Чтобы включить формирование кода прежних версий, измените значение свойства "Стратегия создания кода" конструктора
 // на "Legacy ObjectContext". Это свойство доступно в окне "Свойства", если модель
 // открыта в конструкторе.

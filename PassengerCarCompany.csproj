@@ -145,6 +145,9 @@
     <Compile Include="Entities\BusStop.cs">
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\CountOfBusTrips.cs">
+      <DependentUpon>PassengerCarCompany.tt</DependentUpon>
+    </Compile>
     <Compile Include="Validation Rules\BusStopValidationRules.cs" />
     <Compile Include="Validation Rules\DriverValidationRules.cs" />
     <Compile Include="Validation Rules\RouteSheetValidationRules.cs" />
@@ -174,6 +177,9 @@
       <DependentUpon>PassengerCarCompany.tt</DependentUpon>
     </Compile>
     <Compile Include="Validation Rules\BusValidationRules.cs" />
+    <Compile Include="Windows\CountOfBusTripsWindow.xaml.cs">
+      <DependentUpon>CountOfBusTripsWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\DriverWindow.xaml.cs">
       <DependentUpon>DriverWindow.xaml</DependentUpon>
     </Compile>
@@ -206,6 +212,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\CountOfBusTripsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\DriverWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

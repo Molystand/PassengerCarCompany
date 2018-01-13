@@ -22,5 +22,6 @@
         public virtual DbSet<Route> Route { get; set; }
         public virtual DbSet<RouteSheet> RouteSheet { get; set; }
         public virtual DbSet<StopsOnTheRoute> StopsOnTheRoute { get; set; }
+        public virtual DbSet<CountOfBusTrips> CountOfBusTrips { get; set; }
     }
 }

@@ -16,6 +16,7 @@
         <AssociationConnector Association="PassengerCarCompanyModel.FK__RouteShee__Drive__36B12243" ManuallyRouted="false" />
         <AssociationConnector Association="PassengerCarCompanyModel.FK__RouteShee__Route__37A5467C" ManuallyRouted="false" />
         <AssociationConnector Association="PassengerCarCompanyModel.FK__StopsOnTh__Route__30F848ED" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PassengerCarCompanyModel.CountOfBusTrips" Width="1.5" PointX="6.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

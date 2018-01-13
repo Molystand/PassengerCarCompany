@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PassengerCarCompany"
         mc:Ignorable="d"
-        Title="Пассажирская автокомпания" Height="400" Width="350">
+        Title="Пассажирская автокомпания" Height="450" Width="350">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10"/>
@@ -13,6 +13,7 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
             <RowDefinition/>
@@ -32,5 +33,7 @@
                 Grid.Row="4"/>
         <Button Name="btnStopsOnTheRouteTable" Content="Остановки маршрутов" Click="btnStopsOnTheRouteTable_Click"
                 Grid.Row="5"/>
+        <Button Name="btnCountOfBusTrips" Content="Количество рейсов автобусов" Click="btnCountOfBusTrips_Click"
+                Grid.Row="6"/>
     </Grid>
 </Window>

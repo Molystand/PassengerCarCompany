@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище PassengerCarCompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище PassengerCarCompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Bus">
           <Key>
             <PropertyRef Name="Number" />
@@ -66,6 +66,17 @@
           <Property Name="Number" Type="int" Nullable="false" />
           <Property Name="RouteNumber" Type="int" Nullable="false" />
           <Property Name="StopId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "PassengerCarCompany.dbo.CountOfBusTrips" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="CountOfBusTrips">
+          <Key>
+            <PropertyRef Name="BusNumber" />
+            <PropertyRef Name="Mark" />
+          </Key>
+          <Property Name="BusNumber" Type="nchar" MaxLength="6" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="TripsCount" Type="int" />
         </EntityType>
         <Association Name="FK__RouteShee__BusNu__38996AB5">
           <End Role="Bus" Type="Self.Bus" Multiplicity="1">
@@ -144,6 +155,13 @@
           <EntitySet Name="Route" EntityType="Self.Route" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RouteSheet" EntityType="Self.RouteSheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StopsOnTheRoute" EntityType="Self.StopsOnTheRoute" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CountOfBusTrips" EntityType="Self.CountOfBusTrips" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CountOfBusTrips].[BusNumber] AS [BusNumber], 
+    [CountOfBusTrips].[Mark] AS [Mark], 
+    [CountOfBusTrips].[TripsCount] AS [TripsCount]
+    FROM [dbo].[CountOfBusTrips] AS [CountOfBusTrips]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK__RouteShee__BusNu__38996AB5" Association="Self.FK__RouteShee__BusNu__38996AB5">
             <End Role="Bus" EntitySet="Bus" />
             <End Role="RouteSheet" EntitySet="RouteSheet" />
@@ -165,8 +183,7 @@
             <End Role="StopsOnTheRoute" EntitySet="StopsOnTheRoute" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PassengerCarCompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -339,7 +356,17 @@
             <End Role="Route" EntitySet="Route" />
             <End Role="StopsOnTheRoute" EntitySet="StopsOnTheRoute" />
           </AssociationSet>
+          <EntitySet Name="CountOfBusTrips" EntityType="PassengerCarCompanyModel.CountOfBusTrips" />
         </EntityContainer>
+        <EntityType Name="CountOfBusTrips">
+          <Key>
+            <PropertyRef Name="BusNumber" />
+            <PropertyRef Name="Mark" />
+          </Key>
+          <Property Name="BusNumber" Type="String" Nullable="false" MaxLength="6" FixedLength="true" Unicode="true" />
+          <Property Name="Mark" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="TripsCount" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -410,6 +437,15 @@
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="RouteNumber" ColumnName="RouteNumber" />
                 <ScalarProperty Name="StopId" ColumnName="StopId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CountOfBusTrips">
+            <EntityTypeMapping TypeName="PassengerCarCompanyModel.CountOfBusTrips">
+              <MappingFragment StoreEntitySet="CountOfBusTrips">
+                <ScalarProperty Name="TripsCount" ColumnName="TripsCount" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="BusNumber" ColumnName="BusNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

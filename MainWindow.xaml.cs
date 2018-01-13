@@ -74,6 +74,15 @@ namespace PassengerCarCompany
             window.ShowDialog();
         }
 
+        private void btnCountOfBusTrips_Click(object sender, RoutedEventArgs e)
+        {
+            CountOfBusTripsWindow window = new CountOfBusTripsWindow()
+            {
+                Owner = this
+            };
+            window.ShowDialog();
+        }
+
         #endregion
     }
 }
